@@ -164,7 +164,7 @@ $(document).ready(function(){
 <body>
        
     <!-- input tag -->
-    
+   
 <div class="container-lg">
     <div class="table-responsive">
         <div class="table-wrapper">
@@ -179,11 +179,15 @@ $(document).ready(function(){
             <table class="table table-bordered table-responsive">
                 <thead>
                     <tr>
-                        <th>Venue</th>
+                        
                         <th>Name</th>
                         <th>Faculty Id</th>
-                        <th>Department</th>
+                        <th>E-mail</th>
                         <th>Year</th>
+                        <th>Department</th>
+                        <th>Event</th>
+                        <th>Venue</th>
+                        <th>Duration</th>
                         <th>From time</th>
                         <th>To time</th>
                         <th>From date</th>
@@ -192,347 +196,33 @@ $(document).ready(function(){
                     </tr>
                 </thead>
                 <tbody>
-                    <tr>
-                        <td>IB206</td>
-                        <td>kumar</td>
-                        <td>ct103</td>
-                        <td>CT</td>
-                        <td>2</td>
-                        <td>8am</td>
-                        <td>4pm</td>
-                        <td>3/10/22</td>
-                        <td>3/10/22</td>
-                        <td>club</td>
-                        <td>
-                            <a class="add" title="Add" data-toggle="tooltip"><i class="material-icons">&#xE03B;</i></a>
-                            <a class="edit" title="Edit" data-toggle="tooltip"><i class="material-icons">&#xE254;</i></a>
-                            <a class="delete" title="Delete" data-toggle="tooltip"><i class="material-icons">&#xE872;</i></a>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>IB201</td>
-                        <td>Anuj</td>
-                        <td>ct103</td>
-                        <td>CT</td>
-                        <td>2</td>
-                        <td>8am</td>
-                        <td>4pm</td>
-                        <td>3/10/22</td>
-                        <td>3/10/22</td>
-                        <td>club</td>
-                        <td>
-                            <a class="add" title="Add" data-toggle="tooltip"><i class="material-icons">&#xE03B;</i></a>
-                            <a class="edit" title="Edit" data-toggle="tooltip"><i class="material-icons">&#xE254;</i></a>
-                            <a class="delete" title="Delete" data-toggle="tooltip"><i class="material-icons">&#xE872;</i></a>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>IB201</td>
-                        <td>Anuj</td>
-                        <td>ct103</td>
-                        <td>CT</td>
-                        <td>2</td>
-                        <td>8am</td>
-                        <td>4pm</td>
-                        <td>3/10/22</td>
-                        <td>3/10/22</td>
-                        <td>club</td>
-                        <td>
-                            <a class="add" title="Add" data-toggle="tooltip"><i class="material-icons">&#xE03B;</i></a>
-                            <a class="edit" title="Edit" data-toggle="tooltip"><i class="material-icons">&#xE254;</i></a>
-                            <a class="delete" title="Delete" data-toggle="tooltip"><i class="material-icons">&#xE872;</i></a>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>IB201</td>
-                        <td>Anuj</td>
-                        <td>ct103</td>
-                        <td>CT</td>
-                        <td>2</td>
-                        <td>8am</td>
-                        <td>4pm</td>
-                        <td>3/10/22</td>
-                        <td>3/10/22</td>
-                        <td>club</td>
-                        <td>
-                            <a class="add" title="Add" data-toggle="tooltip"><i class="material-icons">&#xE03B;</i></a>
-                            <a class="edit" title="Edit" data-toggle="tooltip"><i class="material-icons">&#xE254;</i></a>
-                            <a class="delete" title="Delete" data-toggle="tooltip"><i class="material-icons">&#xE872;</i></a>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>IB201</td>
-                        <td>Anuj</td>
-                        <td>ct103</td>
-                        <td>CT</td>
-                        <td>2</td>
-                        <td>8am</td>
-                        <td>4pm</td>
-                        <td>3/10/22</td>
-                        <td>3/10/22</td>
-                        <td>club</td>
-                        <td>
-                            <a class="add" title="Add" data-toggle="tooltip"><i class="material-icons">&#xE03B;</i></a>
-                            <a class="edit" title="Edit" data-toggle="tooltip"><i class="material-icons">&#xE254;</i></a>
-                            <a class="delete" title="Delete" data-toggle="tooltip"><i class="material-icons">&#xE872;</i></a>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>IB201</td>
-                        <td>Anuj</td>
-                        <td>ct103</td>
-                        <td>CT</td>
-                        <td>2</td>
-                        <td>8am</td>
-                        <td>4pm</td>
-                        <td>3/10/22</td>
-                        <td>3/10/22</td>
-                        <td>club</td>
-                        <td>
-                            <a class="add" title="Add" data-toggle="tooltip"><i class="material-icons">&#xE03B;</i></a>
-                            <a class="edit" title="Edit" data-toggle="tooltip"><i class="material-icons">&#xE254;</i></a>
-                            <a class="delete" title="Delete" data-toggle="tooltip"><i class="material-icons">&#xE872;</i></a>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>IB201</td>
-                        <td>Anuj</td>
-                        <td>ct103</td>
-                        <td>CT</td>
-                        <td>2</td>
-                        <td>8am</td>
-                        <td>4pm</td>
-                        <td>3/10/22</td>
-                        <td>3/10/22</td>
-                        <td>club</td>
-                        <td>
-                            <a class="add" title="Add" data-toggle="tooltip"><i class="material-icons">&#xE03B;</i></a>
-                            <a class="edit" title="Edit" data-toggle="tooltip"><i class="material-icons">&#xE254;</i></a>
-                            <a class="delete" title="Delete" data-toggle="tooltip"><i class="material-icons">&#xE872;</i></a>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>IB206</td>
-                        <td>kumar</td>
-                        <td>ct103</td>
-                        <td>CT</td>
-                        <td>2</td>
-                        <td>8am</td>
-                        <td>4pm</td>
-                        <td>3/10/22</td>
-                        <td>3/10/22</td>
-                        <td>club</td>
-                        <td>
-                            <a class="add" title="Add" data-toggle="tooltip"><i class="material-icons">&#xE03B;</i></a>
-                            <a class="edit" title="Edit" data-toggle="tooltip"><i class="material-icons">&#xE254;</i></a>
-                            <a class="delete" title="Delete" data-toggle="tooltip"><i class="material-icons">&#xE872;</i></a>
-                        </td>
-                    </tr>  
-                    <tr>
-                        <td>IB206</td>
-                        <td>kumar</td>
-                        <td>ct103</td>
-                        <td>CT</td>
-                        <td>2</td>
-                        <td>8am</td>
-                        <td>4pm</td>
-                        <td>3/10/22</td>
-                        <td>3/10/22</td>
-                        <td>club</td>
-                        <td>
-                            <a class="add" title="Add" data-toggle="tooltip"><i class="material-icons">&#xE03B;</i></a>
-                            <a class="edit" title="Edit" data-toggle="tooltip"><i class="material-icons">&#xE254;</i></a>
-                            <a class="delete" title="Delete" data-toggle="tooltip"><i class="material-icons">&#xE872;</i></a>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>IB201</td>
-                        <td>Anuj</td>
-                        <td>ct103</td>
-                        <td>CT</td>
-                        <td>2</td>
-                        <td>8am</td>
-                        <td>4pm</td>
-                        <td>3/10/22</td>
-                        <td>3/10/22</td>
-                        <td>club</td>
-                        <td>
-                            <a class="add" title="Add" data-toggle="tooltip"><i class="material-icons">&#xE03B;</i></a>
-                            <a class="edit" title="Edit" data-toggle="tooltip"><i class="material-icons">&#xE254;</i></a>
-                            <a class="delete" title="Delete" data-toggle="tooltip"><i class="material-icons">&#xE872;</i></a>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>IB201</td>
-                        <td>Anuj</td>
-                        <td>ct103</td>
-                        <td>CT</td>
-                        <td>2</td>
-                        <td>8am</td>
-                        <td>4pm</td>
-                        <td>3/10/22</td>
-                        <td>3/10/22</td>
-                        <td>club</td>
-                        <td>
-                            <a class="add" title="Add" data-toggle="tooltip"><i class="material-icons">&#xE03B;</i></a>
-                            <a class="edit" title="Edit" data-toggle="tooltip"><i class="material-icons">&#xE254;</i></a>
-                            <a class="delete" title="Delete" data-toggle="tooltip"><i class="material-icons">&#xE872;</i></a>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>IB105</td>
-                        <td>sankar</td>
-                        <td>ct103</td>
-                        <td>CT</td>
-                        <td>2</td>
-                        <td>8am</td>
-                        <td>4pm</td>
-                        <td>3/10/22</td>
-                        <td>3/10/22</td>
-                        <td>club</td>
-                        <td>
-                            <a class="add" title="Add" data-toggle="tooltip"><i class="material-icons">&#xE03B;</i></a>
-                            <a class="edit" title="Edit" data-toggle="tooltip"><i class="material-icons">&#xE254;</i></a>
-                            <a class="delete" title="Delete" data-toggle="tooltip"><i class="material-icons">&#xE872;</i></a>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>IB101</td>
-                        <td>Sundar</td>
-                        <td>ct103</td>
-                        <td>CT</td>
-                        <td>2</td>
-                        <td>8am</td>
-                        <td>4pm</td>
-                        <td>3/10/22</td>
-                        <td>3/10/22</td>
-                        <td>club</td>
-                        <td>
-                            <a class="add" title="Add" data-toggle="tooltip"><i class="material-icons">&#xE03B;</i></a>
-                            <a class="edit" title="Edit" data-toggle="tooltip"><i class="material-icons">&#xE254;</i></a>
-                            <a class="delete" title="Delete" data-toggle="tooltip"><i class="material-icons">&#xE872;</i></a>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>IB201</td>
-                        <td>Anuj</td>
-                        <td>ct103</td>
-                        <td>CT</td>
-                        <td>2</td>
-                        <td>8am</td>
-                        <td>4pm</td>
-                        <td>3/10/22</td>
-                        <td>3/10/22</td>
-                        <td>club</td>
-                        <td>
-                            <a class="add" title="Add" data-toggle="tooltip"><i class="material-icons">&#xE03B;</i></a>
-                            <a class="edit" title="Edit" data-toggle="tooltip"><i class="material-icons">&#xE254;</i></a>
-                            <a class="delete" title="Delete" data-toggle="tooltip"><i class="material-icons">&#xE872;</i></a>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>IB206</td>
-                        <td>kumar</td>
-                        <td>ct103</td>
-                        <td>CT</td>
-                        <td>2</td>
-                        <td>8am</td>
-                        <td>4pm</td>
-                        <td>3/10/22</td>
-                        <td>3/10/22</td>
-                        <td>club</td>
-                        <td>
-                            <a class="add" title="Add" data-toggle="tooltip"><i class="material-icons">&#xE03B;</i></a>
-                            <a class="edit" title="Edit" data-toggle="tooltip"><i class="material-icons">&#xE254;</i></a>
-                            <a class="delete" title="Delete" data-toggle="tooltip"><i class="material-icons">&#xE872;</i></a>
-                        </td>
-                    </tr>
+                    <?php  
+        foreach ($h->result() as $row)  
+        {  
+            ?>
 
-                    <tr>
-                        <td>IB208</td>
-                        <td>krishna</td>
-                        <td>ct103</td>
-                        <td>CT</td>
-                        <td>2</td>
-                        <td>8am</td>
-                        <td>4pm</td>
-                        <td>3/10/22</td>
-                        <td>3/10/22</td>
-                        <td>club</td>
+            <tr>
+                        <td><?php echo $row->name;?></td>
+                        <td><?php echo $row->faculty_id;?></td>
+                        <td><?php echo $row->email;?></td>
+                        <td><?php echo $row->year;?></td>
+                        <td><?php echo $row->dept;?></td>
+                        <td><?php echo $row->event;?></td>
+                        <td><?php echo $row->venue;?></td>
+                        <td><?php echo $row->duration;?></td>
+                        <td><?php echo $row->f_date;?></td>
+                        <td><?php echo $row->t_date;?></td>
+                        <td><?php echo $row->f_time;?></td>
+                        <td><?php echo $row->t_time;?></td>
                         <td>
                             <a class="add" title="Add" data-toggle="tooltip"><i class="material-icons">&#xE03B;</i></a>
                             <a class="edit" title="Edit" data-toggle="tooltip"><i class="material-icons">&#xE254;</i></a>
                             <a class="delete" title="Delete" data-toggle="tooltip"><i class="material-icons">&#xE872;</i></a>
                         </td>
                     </tr>
-                    <tr>
-                        <td>AG209</td>
-                        <td>har</td>
-                        <td>ct103</td>
-                        <td>CT</td>
-                        <td>2</td>
-                        <td>8am</td>
-                        <td>4pm</td>
-                        <td>3/10/22</td>
-                        <td>3/10/22</td>
-                        <td>club</td>
-                        <td>
-                            <a class="add" title="Add" data-toggle="tooltip"><i class="material-icons">&#xE03B;</i></a>
-                            <a class="edit" title="Edit" data-toggle="tooltip"><i class="material-icons">&#xE254;</i></a>
-                            <a class="delete" title="Delete" data-toggle="tooltip"><i class="material-icons">&#xE872;</i></a>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>AG201</td>
-                        <td>Srikanth</td>
-                        <td>ct103</td>
-                        <td>CT</td>
-                        <td>2</td>
-                        <td>8am</td>
-                        <td>4pm</td>
-                        <td>3/10/22</td>
-                        <td>3/10/22</td>
-                        <td>Mentor meeting</td>
-                        <td>
-                            <a class="add" title="Add" data-toggle="tooltip"><i class="material-icons">&#xE03B;</i></a>
-                            <a class="edit" title="Edit" data-toggle="tooltip"><i class="material-icons">&#xE254;</i></a>
-                            <a class="delete" title="Delete" data-toggle="tooltip"><i class="material-icons">&#xE872;</i></a>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>IB205</td>
-                        <td>Prasath</td>
-                        <td>Cb103</td>
-                        <td>CT</td>
-                        <td>2</td>
-                        <td>8am</td>
-                        <td>4pm</td>
-                        <td>3/10/22</td>
-                        <td>3/10/22</td>
-                        <td>Acadamics</td>
-                        <td>
-                            <a class="add" title="Add" data-toggle="tooltip"><i class="material-icons">&#xE03B;</i></a>
-                            <a class="edit" title="Edit" data-toggle="tooltip"><i class="material-icons">&#xE254;</i></a>
-                            <a class="delete" title="Delete" data-toggle="tooltip"><i class="material-icons">&#xE872;</i></a>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>Ct23</td>
-                        <td>Mohan</td>
-                        <td>ct103</td>
-                        <td>CT</td>
-                        <td>2</td>
-                        <td>8am</td>
-                        <td>4pm</td>
-                        <td>3/10/22</td>
-                        <td>3/10/22</td>
-                        <td>club</td>
-                        <td>
-                            <a class="add" title="Add" data-toggle="tooltip"><i class="material-icons">&#xE03B;</i></a>
-                            <a class="edit" title="Edit" data-toggle="tooltip"><i class="material-icons">&#xE254;</i></a>
-                            <a class="delete" title="Delete" data-toggle="tooltip"><i class="material-icons">&#xE872;</i></a>
-                        </td>
-                    </tr>
+        <?php }  
+    ?>
+    
                     
                     <script src="./style.css"></script>
                 </tbody>

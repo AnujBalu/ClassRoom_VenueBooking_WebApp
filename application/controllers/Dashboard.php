@@ -28,11 +28,14 @@ class Dashboard extends CI_Controller {
 	}
 	public function open_table()
 	{
+		$this->load->database();  
+	   	$this->load->model('Inserting_model');  
+	   	$data['h'] = $this->Inserting_model->select();
 		$this->load->helper('url');
 		$this->load->view('Admin_1/Templates/style_script');
 		$this->load->view('Admin_1/Templates/navbar');
 		$this->load->view('Admin_1/Templates/side_bar');
-		$this->load->view('Admin_1/table');
+		$this->load->view('Admin_1/table',$data);
 		$this->load->view('Admin_1/Templates/java_script');
 		
 	}
@@ -49,6 +52,7 @@ class Dashboard extends CI_Controller {
 
 	public function inserting_data(){
         //this array is used to get fetch data from the view page.  
+		$this->load->helper('url');
         $data = array(  
                         'name'     => $this->input->post('name'),
 						'faculty_id'     => $this->input->post('faculty_id'),
@@ -67,7 +71,7 @@ class Dashboard extends CI_Controller {
 		
 		$this->load->model("Inserting_model");
 		$this->Inserting_model->form_info($data);
-
-        redirect("Dashboard");  
+						
+        redirect('Dashboardn');
 	}
 }

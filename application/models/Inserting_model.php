@@ -5,5 +5,11 @@ class Inserting_model extends CI_Model{
         $this->load->database();
         $this->db->insert('form',$data);
     }
+    public function select()  
+      {  
+         $query = $this->db->get('form');  
+         return $query;  
+      }
+    
 }
 ?>
