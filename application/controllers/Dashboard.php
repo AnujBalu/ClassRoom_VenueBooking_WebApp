@@ -46,4 +46,28 @@ class Dashboard extends CI_Controller {
 		$this->load->view('Admin_1/Templates/java_script');
 		
 	}
+
+	public function inserting_data(){
+        //this array is used to get fetch data from the view page.  
+        $data = array(  
+                        'name'     => $this->input->post('name'),
+						'faculty_id'     => $this->input->post('faculty_id'),
+						'email'     => $this->input->post('email'),
+						'year'     => $this->input->post('year'),
+						'dept'     => $this->input->post('dept'),
+						'event'     => $this->input->post('event'),
+						'venue'     => $this->input->post('venue'),
+						'duration'     => $this->input->post('duration'),
+						'f_date'     => $this->input->post('f_date'),
+						't_date'     => $this->input->post('t_date'),
+						'f_time'     => $this->input->post('f_time'),
+						't_time'     => $this->input->post('t_time'),
+                        );   
+        
+		
+		$this->load->model("Inserting_model");
+		$this->Inserting_model->form_info($data);
+
+        redirect("Dashboard");  
+	}
 }

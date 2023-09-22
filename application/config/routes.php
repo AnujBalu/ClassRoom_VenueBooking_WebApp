@@ -43,7 +43,7 @@ $route['Dashboard']='Dashboard';
 $route['open_form'] = 'Dashboard/open_form';
 $route['open_listform'] = 'Dashboard/open_listform';
 $route['open_table'] = 'Dashboard/open_table';
-$route['Dashboard/inserts']='Dashboard/inserts';
+$route['Dashboard/inserting_data']='Dashboard/inserting_data';
 $route['404_override'] = '';
 
 

@@ -7,7 +7,7 @@
               <div class="card">
                 <div class="card-body">
                   <h4 class="card-title p-3 mb-2 bg-primary text-white rounded" >Venue Form</h4>
-                  <form class="form-sample">
+                  <form class="form-sample" method="post" action="<?php echo base_url(); ?>Dashboard/inserting_data">
                     <p class="card-description">
       
                     </p>
@@ -16,7 +16,7 @@
                         <div class="form-group row">
                           <label class="col-sm-3 col-form-label">Name</label>
                           <div class="col-sm-9">
-                            <input type="text" class="form-control" placeholder="EX : SRI M AP/CT"/>
+                            <input type="text" class="form-control" name="name" placeholder="EX : SRI M AP/CT"/>
                           </div>
                         </div>
                       </div>
@@ -24,7 +24,7 @@
                         <div class="form-group row">
                           <label class="col-sm-3 col-form-label">Faculty ID</label>
                           <div class="col-sm-9">
-                            <input type="text" class="form-control" placeholder="EX : CT12345" />
+                            <input type="text" class="form-control" name="faculty_id" placeholder="EX : CT12345" />
                           </div>
                         </div>
                       </div>
@@ -34,7 +34,7 @@
                         <div class="form-group row">
                           <label class="col-sm-3 col-form-label" >Email Address</label>
                           <div class="col-sm-9">
-                            <input type="email" class="form-control"  placeholder="Email" />
+                            <input type="email" class="form-control" name="email" placeholder="Email" />
                           </div>
                         </div>
                       </div>
@@ -42,7 +42,7 @@
                         <div class="form-group row">
                           <label for="year" class="col-sm-3 form-label">Year</label>
                           <div class="col-sm-9">
-                              <input class="form-control" list="datalistOptions2" id="year" placeholder="Year">
+                              <input class="form-control" list="datalistOptions2" name="year" id="year" placeholder="Year">
                             <datalist id="datalistOptions2">
                               <option value="" disabled selected hidden>Year</option>
                               <option>UG - I</option>
@@ -61,7 +61,7 @@
                         <div class="form-group row">
                           <label for="dept" class="col-sm-3 form-label">Department</label>                          
                           <div class="col-sm-9">
-                            <input class="form-control" list="datalistOptions" id="dept" placeholder="Department">
+                            <input class="form-control" list="datalistOptions" name="dept" id="dept" placeholder="Department">
                             <datalist id="datalistOptions">
                                  <option>AERONAUTICAL ENGINEERING</option>
                                  <option>ARTIFICIAL INTELLIGENCE AND DATA SCIENCE</option>
@@ -102,7 +102,7 @@
                         <div class="form-group row">
                           <label for="event_id" class="col-sm-3 form-label">Events</label>
                           <div class="col-sm-9">
-                              <input class="form-control" list="datalistOptions1" id="event_id" placeholder="Events">
+                              <input class="form-control" list="datalistOptions1" name="event" id="event_id" placeholder="Events">
                             <datalist id="datalistOptions1">
                               <option>Academics</option>
                               <option>Interview</option>
@@ -123,7 +123,7 @@
                         <div class="form-group row">
                           <label class="col-sm-3 col-form-label">Venue</label>
                           <div class="col-sm-9">
-                            <input type="text" class="form-control" placeholder="EX : CT23" />
+                            <input type="text" class="form-control" name="venue" placeholder="EX : CT23" />
                           </div>
                         </div>
                       </div>
@@ -131,7 +131,7 @@
                         <div class="form-group row">
                           <label class="col-sm-3 col-form-label">Duration<br>(in hrs)</label>
                           <div class="col-sm-9">
-                            <input type="number" class="form-control" />
+                            <input type="number" name="duration" class="form-control" />
                           </div>
                         </div>
                       </div>
@@ -141,7 +141,7 @@
                         <div class="form-group row">
                           <label class="col-sm-3 col-form-label">From Date</label>
                           <div class="col-sm-9">
-                            <input type="Date" class="form-control" />
+                            <input type="Date" name="f_date" class="form-control" />
                           </div>
                         </div>
                       </div>
@@ -149,7 +149,7 @@
                         <div class="form-group row">
                           <label class="col-sm-3 col-form-label">To Date</label>
                           <div class="col-sm-9">
-                            <input type="date" class="form-control" />
+                            <input type="date" name="t_date" class="form-control" />
                           </div>
                         </div>
                       </div>
@@ -159,7 +159,7 @@
                         <div class="form-group row">
                           <label class="col-sm-3 col-form-label">From Time</label>
                           <div class="col-sm-9">
-                            <input type="time" class="form-control" />
+                            <input type="time" name="f_time" class="form-control" />
                           </div>
                         </div>
                       </div>
@@ -167,7 +167,7 @@
                         <div class="form-group row">
                           <label class="col-sm-3 col-form-label">To Time</label>
                           <div class="col-sm-9">
-                            <input type="time" class="form-control" />
+                            <input type="time" name="t_time"  class="form-control" />
                           </div>
                         </div>
                       </div>
