@@ -39,6 +39,11 @@
 */
 
 $route['default_controller'] = "Login";
+$route['Dashboard']='Dashboard';
+$route['open_form'] = 'Dashboard/open_form';
+$route['open_listform'] = 'Dashboard/open_listform';
+$route['open_table'] = 'Dashboard/open_table';
+$route['Dashboard/inserts']='Dashboard/inserts';
 $route['404_override'] = '';
 
 

@@ -1,6 +1,6 @@
 <?php
 
-$config['base_url'] = 'http://localhost/venuebooking_v2/';
+$config['base_url'] = 'http://localhost/venuebooking/';
 $config['index_page'] = 'index.php';
 $config['uri_protocol']	= 'QUERY_STRING';
 $config['url_suffix'] = '';
