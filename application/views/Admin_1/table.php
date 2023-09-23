@@ -215,9 +215,9 @@ $(document).ready(function(){
                         <td><?php echo $row->f_time;?></td>
                         <td><?php echo $row->t_time;?></td>
                         <td>
-                            <a class="add" title="Add" data-toggle="tooltip"><i class="material-icons">&#xE03B;</i></a>
+                            
                             <a class="edit" title="Edit" data-toggle="tooltip"><i class="material-icons">&#xE254;</i></a>
-                            <a class="delete" title="Delete" data-toggle="tooltip"><i class="material-icons">&#xE872;</i></a>
+                            <a class="delete" title="Delete" href="<?php echo base_url(); ?>deletes/<?php echo $row->id;?>" data-toggle="tooltip"><i class="material-icons">&#xE872;</i></a>
                         </td>
                     </tr>
         <?php }  

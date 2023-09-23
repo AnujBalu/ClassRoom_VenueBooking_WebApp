@@ -39,11 +39,16 @@
 */
 
 $route['default_controller'] = "Login";
+$route['deletes/(:any)'] = 'Dashboard/deletes/$1';
+$route['room_type_deletes/(:any)'] = 'Dashboard/room_type_deletes/$1';
+$route['room_type_edit/(:any)'] = 'Dashboard/room_type_edit/$1';
 $route['Dashboard']='Dashboard';
 $route['open_form'] = 'Dashboard/open_form';
 $route['open_listform'] = 'Dashboard/open_listform';
+$route['room_type_edit'] = 'Dashboard/room_type_edit';
 $route['open_table'] = 'Dashboard/open_table';
-$route['Dashboard/inserting_data']='Dashboard/inserting_data';
+$route['inserting_data']='Dashboard/inserting_data';
+$route['room_type_data']='Dashboard/room_type_data';
 $route['404_override'] = '';
 
 

@@ -20,6 +20,33 @@
   <script src="js/dashboard.js"></script>
   <script src="js/Chart.roundedBarCharts.js"></script>
   <!-- End custom js for this page-->
+
+
+  <script> 
+      function text(){
+       var ab = document.getElementById("sysRadio1");
+       var na = document.getElementById("sri");
+       if(ab.selected == true  ){
+        na.style.display="block";
+       }else if(ab.checked == true){
+        na.style.display="block";
+       }else{
+        na.style.display="none"
+       }
+      }
+
+      function change(){
+        var event_box = document.getElementById("event_id").value;
+        var new_other = document.getElementById("new_other");
+        if(event_box=='Others'){
+          new_other.style.display="block";
+        }
+        else{
+          new_other.style.display="none";
+        }
+      }
+  </script>
+
 </body>
 
 </html>

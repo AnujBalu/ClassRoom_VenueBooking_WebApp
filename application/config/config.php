@@ -2,7 +2,7 @@
 
 $config['base_url'] = 'http://localhost/venuebooking/';
 $config['index_page'] = '';
-$config['uri_protocol']	= 'REQUEST_URI';
+$config['uri_protocol']	= 'AUTO';
 $config['url_suffix'] = '';
 $config['language']	= 'english';
 $config['charset'] = 'UTF-8';
