@@ -16,7 +16,7 @@
             </a>
             <div class="collapse" id="form-elements">
               <ul class="nav flex-column sub-menu">
-                <li class="nav-item"><a class="nav-link" href="<?php echo base_url()?>open_form">Form</a></li>
+                <li class="nav-item"><a class="nav-link" href="<?php echo base_url()?>Dashboard/open_form">Form</a></li>
               </ul>
             </div>
           </li>
@@ -28,7 +28,7 @@
             </a>
             <div class="collapse" id="charts">
               <ul class="nav flex-column sub-menu">
-                <li class="nav-item"> <a class="nav-link" href="<?php echo base_url()?>open_listform">List Form</a></li>
+                <li class="nav-item"> <a class="nav-link" href="<?php echo base_url()?>Dashboard/open_listform">List Form</a></li>
               </ul>
             </div>
           </li>
@@ -40,7 +40,7 @@
             </a>
             <div class="collapse" id="tables">
               <ul class="nav flex-column sub-menu">
-                <li class="nav-item"> <a class="nav-link" href="<?php echo base_url()?>open_table">Table</a></li>
+                <li class="nav-item"> <a class="nav-link" href="<?php echo base_url()?>Dashboard/open_table">Table</a></li>
               </ul>
             </div>
           </li>

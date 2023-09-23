@@ -6,9 +6,8 @@
               <div class="card">
                 <div class="card-body">
                   <h4 class="card-title p-3 mb-2 bg-primary text-white rounded" >Venue Form</h4>
-                  <form class="form-sample" method="post" action="<?php echo base_url(); ?>inserting_data">
+                  <form class="form-sample" method="post" action="<?php echo base_url(); ?>Dashboard/inserting_data">
                     <p class="card-description">
-      
                     </p>
                     <div class="row">
                       <div class="col-md-6">

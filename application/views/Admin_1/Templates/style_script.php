@@ -16,13 +16,14 @@
   <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.12.1/css/jquery.dataTables.min.css">
   <!-- End plugin css for this page -->
   <!-- inject:css -->
-  <link rel="stylesheet" href="vendors/feather/feather.css">
+  <link href="<?php echo base_url();?>/vendors/feather/feather.css" rel="stylesheet">
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/lykmapipo/themify-icons@0.1.2/css/themify-icons.css">
-  <link rel="stylesheet" href="vendors/css/vendor.bundle.base.css">
+ 
 
-  <link rel="stylesheet" type="text/css" href="js/select.dataTables.min.css">
+  <link href="<?php echo base_url();?>/vendors/css/vendor.bundle.base.css" rel="stylesheet">
 
-  <link rel="stylesheet" type="text/css" href="css/vertical-layout-light/style.css">
+  <link href="<?php echo base_url();?>/js/select.dataTables.min.css" rel="stylesheet">
+  <link href="<?php echo base_url();?>/css/vertical-layout-light/style.css" rel="stylesheet">
 
   <!-- endinject -->
   <link rel="shortcut icon" href="images/logo/title.png" />

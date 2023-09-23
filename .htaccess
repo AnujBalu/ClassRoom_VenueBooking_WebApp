@@ -15,6 +15,3 @@ RewriteRule ^(.*)$ /index.php?$1 [L]
 <IfModule mod_security.c>
 SecFilterScanPOST Off
 </IfModule>
-
-
-	
