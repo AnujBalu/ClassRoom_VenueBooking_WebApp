@@ -9,78 +9,91 @@
                   <form class="form-sample" method="post" action="<?php echo base_url(); ?>Dashboard/inserting_data">
                     <p class="card-description">
                     </p>
+
                     <div class="row">
-                      <div class="col-md-6">
+                    <div class="col-md-12">
                         <div class="form-group row">
-                          <label class="col-sm-3 col-form-label">Name</label>
-                          <div class="col-sm-9">
-                            <input type="text" name="name" class="form-control" placeholder="EX : SRI M AP/CT"/>
+                          <label class="col-sm-6 col-form-label">Are you a Faculty/Student: </label>
+                          <div class="col-sm-3">
+                            <div class="form-check">
+                              <label class="form-check-label">
+                                <input type="radio" name="user" class="form-check-input" id="Faculty" value="YES"  onclick="faculty_or_student()">
+                                Faculty
+                              </label>
+                            </div>
                           </div>
-                        </div>
-                      </div>
-                      <div class="col-md-6">
-                      <div class="form-group row">
-                          <label for="year" class="col-sm-3 form-label">Year</label>
-                          <div class="col-sm-9">
-                              <input class="form-control" name="year" list="datalistOptions3" id="year" placeholder="Year">
-                            <datalist id="datalistOptions3">
-                              <option value="" disabled selected hidden>Year</option>
-                              <option>UG - I</option>
-                              <option>UG - II</option>
-                              <option>UG - III</option>
-                              <option>UG - IV</option>
-                              <option>PG - I</option>
-                              <option>PG - II</option>
-                            </select>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                    <div class="row">
-                      <div class="col-md-6">
-                      <div class="form-group row">
-                          <label for="Cap" class="col-sm-3 form-label">Departments</label>
-                          <div class="col-sm-9">
-                              <input class="form-control" name="dept" list="datalistOptions2" id="Cap" placeholder="Department">
-                            <datalist id="datalistOptions2">
-                              <option value="" disabled selected hidden>Department</option>
-                              <option>AERONAUTICAL ENGINEERING</option>
-                                 <option>ARTIFICIAL INTELLIGENCE AND DATA SCIENCE</option>
-                                 <option>AUTOMOBILE ENGINEERING</option>
-                                 <option>BIOTECHNOLOGY</option>
-                                 <option>CIVIL ENGINEERING</option>
-                                 <option>COMPUTER SCIENCE AND DESIGN</option>
-                                 <option>COMPUTER TECHNOLOGY</option>
-                                 <option> ELECTRONICS AND COMMUNICATION ENGINEERING</option>
-                                 <option>FASHION TECHNOLOGY</option>
-                                 <option>INFORMATION TECHNOLOGY</option>
-                                 <option>MECHANICAL ENGINEERING</option>
-                                 <option> MECHATRONICS</option>
-                                 <option>AGRICULTURAL ENGINEERING</option>
-                                 <option>ARTIFICIAL INTELLIGENCE AND MACHINE LEARNING</option>
-                                 <option>BIOMEDICAL ENGINEERING</option>
-                                 <option>COMPUTER SCIENCE AND BUSINESS SYSTEMS</option>
-                                 <option>COMPUTER SCIENCE AND ENGINEERING</option>
-                                 <option>ELECTRICAL AND ELECTRONICS ENGINEERING</option>
-                                 <option>ELECTRONICS AND INSTRUMENTATION ENGINEERING</option>
-                                 <option>FOOD TECHNOLOGY</option>
-                                 <option>INFORMATION SCIENCE AND ENGINEERING</option>
-                                 <option>TEXTILE TECHNOLOGY</option>
-                                 <option>MATHEMATICS</option>
-                                 <option>PHYSICS</option>
-                                 <option>CHEMISTRY</option>
-                                 <option>TRAINING & PLACEMENT</option>
-                                 <option>HUMANITIES</option>
-                                 <option>PHYSICAL EDUCATION</option>
-                                 <option> YOGA</option>
-                                 <option id= "he" onclick="text()">OTHERS</option>
-                              
-                            </datalist>
+                          <div class="col-sm-3">
+                            <div class="form-check">
+                              <label class="form-check-label">
+                                <input type="radio" class="form-check-input" name="user" id="Student" value="NO" onclick="faculty_or_student()">
+                                Student
+                              </label>
+                            </div>
                           </div>
                         </div>
                       </div>
 
-                    
+
+                    </div>
+
+
+                    <div class="div" id="faculty_user" style="display:none">
+                    <div class="row">
+                        <div class="col-md-6">
+                          <div class="form-group row">
+                            <label class="col-sm-3 col-form-label">Faculty Name</label>
+                            <div class="col-sm-9">
+                              <input type="text" name="faculty_name" class="form-control" placeholder="NAME"/>
+                            </div>
+                          </div>
+                        </div>
+                        
+                        <div class="col-md-6">
+                          <div class="form-group row">
+                            <label class="col-sm-3 col-form-label">Faculty Id</label>
+                            <div class="col-sm-9">
+                              <input type="text" name="faculty_id" class="form-control" placeholder="ID"/>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+
+                  <div class="div" id="student_user" style="display:none">
+                    <div class="row">
+                      <div class="col-md-6">
+                          <div class="form-group row">
+                            <label class="col-sm-3 col-form-label">Student Name</label>
+                            <div class="col-sm-9">
+                              <input type="text" name="Student_name" class="form-control" placeholder="NAME"/>
+                            </div>
+                          </div>
+                        </div>
+                        
+                        <div class="col-md-6">
+                          <div class="form-group row">
+                            <label class="col-sm-3 col-form-label">Student Id</label>
+                            <div class="col-sm-9">
+                              <input type="text" name="Student_id" class="form-control" placeholder="ID"/>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+
+
+                    </div>
+
+
+                    <div class="row">
+                      <div class="col-md-6">
+                        <div class="form-group row">
+                          <label class="col-sm-3 col-form-label">E-mail</label>
+                          <div class="col-sm-9">
+                            <input type="email" name="email" class="form-control" placeholder="EX : abc@bitsathy.ac.in"/>
+                          </div>
+                        </div>
+                      </div>
+                      
                     
                       <div class="col-md-6">
                         <div class="form-group row">
@@ -112,7 +125,7 @@
                       <div class="row">
                        <div class="col-md-6">
                          <div class="form-group row">
-                           <label for="event_id" class="col-sm-3 form-label">Events</label>
+                           <label for="event_id" class="col-sm-3 form-label">Room Type</label>
                            <div class="col-sm-9">
                               <input class="form-control" name="event" list="datalistOptions1" id="event_id" onchange="change(this.value)" placeholder="Events">
                              <datalist id="datalistOptions1">
@@ -142,18 +155,18 @@
                     
                       <div class="col-md-6">
                         <div class="form-group row">
-                          <label class="col-sm-3 col-form-label">Venue</label>
+                          <label class="col-sm-3 col-form-label">Proposal</label>
                           <div class="col-sm-9">
-                            <input type="text" name="venue" class="form-control" placeholder="EX : CT23" />
+                            <input type="textarea" name="venue" class="form-control" placeholder="Reason" />
                           </div>
                         </div>
                       </div>
 
-                    <div class="col-md-6">
+                      <div class="col-md-6">
                         <div class="form-group row">
-                          <label class="col-sm-3 col-form-label">Duration<br>(in hrs)</label>
+                          <label class="col-sm-3 col-form-label">From Date</label>
                           <div class="col-sm-9">
-                            <input type="number" name="duration" class="form-control" />
+                            <input type="datetime-local" id="from_date_time" name="from_date_time" class="form-control">
                           </div>
                         </div>
                       </div>
@@ -161,25 +174,9 @@
 
                       <div class="col-md-6">
                         <div class="form-group row">
-                          <label class="col-sm-3 col-form-label">Date</label>
+                          <label class="col-sm-3 col-form-label">To Date</label>
                           <div class="col-sm-9">
-                            <input type="Date" name="date" class="form-control" />
-                          </div>
-                        </div>
-                      </div>
-                      <div class="col-md-6">
-                        <div class="form-group row">
-                          <label class="col-sm-3 col-form-label">From Time</label>
-                          <div class="col-sm-9">
-                            <input type="time" name="f_time" class="form-control" />
-                          </div>
-                        </div>
-                      </div>
-                      <div class="col-md-6">
-                        <div class="form-group row">
-                          <label class="col-sm-3 col-form-label">To Time</label>
-                          <div class="col-sm-9">
-                            <input type="time" name="t_time" class="form-control" />
+                            <input type="datetime-local" id="to_date_time" name="to_date_time" class="form-control">
                           </div>
                         </div>
                       </div>
@@ -187,7 +184,7 @@
 
                       <div class="col-md-6">
                         <div class="form-group row">
-                          <label class="col-sm-3 col-form-label">Projecter and Speakers</label>
+                          <label class="col-sm-3 col-form-label">Projecter</label>
                           <div class="col-sm-4">
                             <div class="form-check">
                               <label class="form-check-label">
@@ -230,8 +227,41 @@
                         </div>
                       </div>
                     
+
+                      
+                    <div class="col-md-6">
+                        <div class="form-group row">
+                          <label class="col-sm-3 col-form-label">Speaker</label>
+                          <div class="col-sm-4">
+                            <div class="form-check">
+                              <label class="form-check-label">
+                                <input type="radio" name="speaker" class="form-check-input" id="speaker" value="YES"  onclick="select_speaker()">
+                                Yes
+                              </label>
+                            </div>
+                          </div>
+                          <div class="col-sm-5">
+                            <div class="form-check">
+                              <label class="form-check-label">
+                                <input type="radio" class="form-check-input" name="speaker" id="speaker" value="NO" onclick="select_speaker()">
+                                No
+                              </label>
+                            </div>
+                          </div>
+                          </div>
+                      </div>
+
+                      <div class="col-md-6" id="no_of_speaker" style="display:none;">
+                        <div class="form-group row">
+                          <label class="col-sm-3 col-form-label" >No.of Speakers</label>
+                          <div class="col-sm-9" >
+                            <input type="number" value="" name="no_of_speaker" class="form-control" placeholder="60"   />
+                          </div>
+                        </div>
+                      </div> 
                     
-                   
+</div>
+<div class="row">
                     <div class="col-md-6">
                         <div class="form-group row">
                           <label class="col-sm-3 col-form-label">Systems</label>
@@ -264,14 +294,16 @@
                       
                       
                     </div>
-                    </div>
+</div>
+
+                      
                     
 
                     
 
 
-                      <button type="submit" class="btn btn-primary mr-2">Register</button>
-                    <button class="btn btn-light">Cancel</button>
+                      <input type="submit" id="submit" class="btn btn-primary mr-2" value="Register"/>
+                    <button class="btn btn-light" href="<?php echo base_url()?>Dashboard/open_form">Cancel</button>
                     </div>
                   </form>
                 </div>

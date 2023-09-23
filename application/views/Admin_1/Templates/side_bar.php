@@ -28,7 +28,10 @@
             </a>
             <div class="collapse" id="charts">
               <ul class="nav flex-column sub-menu">
-                <li class="nav-item"> <a class="nav-link" href="<?php echo base_url()?>Dashboard/open_listform">List Form</a></li>
+                <li class="nav-item"> <a class="nav-link" href="<?php echo base_url()?>Dashboard/open_listform">Room Type</a></li>
+              </ul>
+              <ul class="nav flex-column sub-menu">
+                <li class="nav-item"> <a class="nav-link" href="<?php echo base_url()?>Dashboard/academic_schedule">Academic Schedule</a></li>
               </ul>
             </div>
           </li>

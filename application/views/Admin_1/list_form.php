@@ -6,7 +6,7 @@
             <div class="col-12 grid-margin">
               <div class="card">
                 <div class="card-body">
-                  <h4 class="card-title bg-primary p-3" style="border-radius:15px; color:whitesmoke;">Info Search</h4>
+                  <h4 class="card-title bg-primary p-3" style="border-radius:15px; color:whitesmoke;">Insert Room Info</h4>
                   <form class="form-sample" method="post" action="<?php echo base_url(); ?>Dashboard/room_type_data/<?php echo $room_data->id; ?>">
                     <p class="card-description">
       
@@ -14,26 +14,26 @@
 
                        <!-- End of Name -->
 
-                      <!-- Starting of Block Name -->
+                      <!-- Starting of Name -->
                     <div class="row">
                       <div class="col-md-6">
-                        <div class="form-group row">
-                          <label class="col-sm-4 col-form-label">Block Name</label>
-                          <div class="col-sm-8">
-                          <input class="form-control" value="<?php echo $room_data->block_name; ?>" name="block_name" list="datalistOptions1" id="room_type" placeholder="EX : Main Auditorium" required>
-                            <datalist id="datalistOptions1">
-                            <?php  
-                                foreach ($block_name->result() as $row)  
-                                {  
-                                    ?>
-                              <option><?php echo $row->name ?></option>
-                              <?php } ?>
-                            </select>
+                          <div class="form-group row">
+                            <label class="col-sm-4 col-form-label">Name</label>
+                            <div class="col-sm-8">
+                                <input class="form-control" value="<?php echo $room_data->name; ?>" name="room_type" list="datalistOptions3" id="room_type" placeholder="EX : Seminar Hall" required >
+                              <datalist id="datalistOptions3">
+                              <?php  
+                                  foreach ($room_type->result() as $row)  
+                                  {  
+                                      ?>
+                                <option><?php echo $row->name ?></option>
+                                <?php } ?>
+                              </select>
+                            </div>
                           </div>
                         </div>
-                      </div>
 
-                      <!-- End of Block Name -->
+                      <!-- End of Name -->
                     <!-- Starting of floor --> 
                     <div class="col-md-6">
                         <div class="form-group row">
@@ -61,7 +61,15 @@
                         <div class="form-group row">
                           <label class="col-sm-4 col-form-label">Seating Capacity</label>
                           <div class="col-sm-8">
-                            <input type="number" value="<?php echo $room_data->seating_capacity; ?>" name="seating_capacity" class="form-control" placeholder="EX : 60" required />
+                            <input type="number" value="<?php echo $room_data->seating_capacity; ?>" name="seating_capacity" list="datalistOptions0" class="form-control" placeholder="EX : 60" required />
+                            <datalist id="datalistOptions0">
+                            <?php  
+                                foreach ($seating_capacity->result() as $row)  
+                                {  
+                                    ?>
+                              <option><?php echo $row->capacity ?></option>
+                              <?php } ?>
+                            </select>
                           </div>
                         </div>
                       </div>
@@ -69,16 +77,15 @@
                       <!-- End of Seating Capacity -->
 
 
-                      <!-- Starting of Room Type -->
-                      
+                      <!-- Starting of Block name -->
                       <div class="col-md-6">
                         <div class="form-group row">
-                          <label class="col-sm-4 col-form-label">Room Type</label>
+                          <label class="col-sm-4 col-form-label">Block Name</label>
                           <div class="col-sm-8">
-                              <input class="form-control" value="<?php echo $room_data->room_type; ?>" name="room_type" list="datalistOptions3" id="room_type" placeholder="EX : Seminar Hall" required >
-                            <datalist id="datalistOptions3">
+                          <input class="form-control" value="<?php echo $room_data->block_name; ?>" name="block_name" list="datalistOptions1" id="room_type" placeholder="EX : Main Auditorium" required>
+                            <datalist id="datalistOptions1">
                             <?php  
-                                foreach ($room_type->result() as $row)  
+                                foreach ($block_name->result() as $row)  
                                 {  
                                     ?>
                               <option><?php echo $row->name ?></option>
@@ -87,10 +94,11 @@
                           </div>
                         </div>
                       </div>
-                    </div>  
+                      
+                       
+                      </div>
 
-
-                    <!-- End of Room Type -->
+                    <!-- End of block name -->
 
                     <!-- Starting of Projector -->
                     <div class="row">
@@ -202,6 +210,81 @@
 
                           <!-- End of WIFI -->
 
+
+                          <!-- Starting of Speaker -->
+                          <div class="row">
+
+                      <div class="col-md-6">
+                        <div class="form-group row">
+                          <label class="col-sm-4 col-form-label">Speaker</label>
+
+                          <?php 
+                                  $proj = $room_data->speaker;
+                                  if($proj != "NO" and $proj != ""){
+                                ?>
+                          <div class="col-sm-4">
+                            <div class="form-check">
+                              <label class="form-check-label">
+                                <input type="radio" checked="checked" name="speaker" class="form-check-input" id="speaker" value="YES"  onclick="select_speaker()">
+                                Yes
+                              </label>
+                            </div>
+                          </div>
+                          <div class="col-sm-4">
+                            <div class="form-check">
+                              <label class="form-check-label">
+                                <input type="radio" class="form-check-input" name="speaker" id="speaker" value="NO" onclick="select_speaker()">
+                                No
+                              </label>
+                            </div>
+                          </div>
+                          </div>
+                      </div>
+
+                        <div class="col-md-6" id="no_of_speaker" >
+                        <div class="form-group row"  >
+
+                          <label class="col-sm-3 col-form-label" >No.of Speakers</label>
+                          <div class="col-sm-9" >
+                            <input type="number" value="<?php echo $room_data->speaker; ?>" name="no_of_speaker" class="form-control" placeholder="60"   />
+                          </div>
+                        </div>
+                      </div> 
+                          <?php }
+                          else{
+                            ?>
+
+                          <div class="col-sm-4">
+                            <div class="form-check">
+                              <label class="form-check-label">
+                                <input type="radio"  name="speaker" class="form-check-input" id="speaker" value="YES"  onclick="select_speaker()">
+                                Yes
+                              </label>
+                            </div>
+                          </div>
+                          <div class="col-sm-4">
+                            <div class="form-check">
+                              <label class="form-check-label">
+                                <input type="radio" checked="checked" class="form-check-input" name="speaker" id="speaker" value="NO" onclick="select_speaker()">
+                                No
+                              </label>
+                            </div>
+                          </div>
+                          </div>
+                      </div>
+                          <div class="col-md-6" id="no_of_speaker" style="display:none" >
+                        <div class="form-group row"  >
+                          <label class="col-sm-3 col-form-label" >No.of Speaker</label>
+                          <div class="col-sm-9" >
+                            <input type="number" name="no_of_speaker" class="form-control" placeholder="60"   />
+                          </div>
+                        </div>
+                      </div>
+                          </div>
+                          <?php } ?>
+
+                      <!-- End of Speaker -->
+
                           <!-- Starting of Systems -->
                           <div class="row">
 
@@ -275,79 +358,8 @@
                           <?php } ?>
                         
                           <!-- End of Systems -->
-                          <!-- Starting of Speaker -->
-                          <div class="row">
+                          
 
-<div class="col-md-6">
-  <div class="form-group row">
-    <label class="col-sm-4 col-form-label">Speaker</label>
-
-    <?php 
-            $proj = $room_data->speaker;
-            if($proj != "NO" and $proj != ""){
-          ?>
-    <div class="col-sm-4">
-      <div class="form-check">
-        <label class="form-check-label">
-          <input type="radio" checked="checked" name="speaker" class="form-check-input" id="speaker" value="YES"  onclick="select_speaker()">
-          Yes
-        </label>
-      </div>
-    </div>
-    <div class="col-sm-4">
-      <div class="form-check">
-        <label class="form-check-label">
-          <input type="radio" class="form-check-input" name="speaker" id="speaker" value="NO" onclick="select_speaker()">
-          No
-        </label>
-      </div>
-    </div>
-    </div>
-</div>
-
-  <div class="col-md-6" id="no_of_speaker" >
-  <div class="form-group row"  >
-
-    <label class="col-sm-3 col-form-label" >No.of Speakers</label>
-    <div class="col-sm-9" >
-      <input type="number" value="<?php echo $room_data->speaker; ?>" name="no_of_speaker" class="form-control" placeholder="60"   />
-    </div>
-  </div>
-</div> 
-    <?php }
-    else{
-      ?>
-
-    <div class="col-sm-4">
-      <div class="form-check">
-        <label class="form-check-label">
-          <input type="radio"  name="speaker" class="form-check-input" id="speaker" value="YES"  onclick="select_speaker()">
-          Yes
-        </label>
-      </div>
-    </div>
-    <div class="col-sm-4">
-      <div class="form-check">
-        <label class="form-check-label">
-          <input type="radio" checked="checked" class="form-check-input" name="speaker" id="speaker" value="NO" onclick="select_speaker()">
-          No
-        </label>
-      </div>
-    </div>
-    </div>
-</div>
-    <div class="col-md-6" id="no_of_speaker" style="display:none" >
-  <div class="form-group row"  >
-    <label class="col-sm-3 col-form-label" >No.of Speaker</label>
-    <div class="col-sm-9" >
-      <input type="number" name="no_of_speaker" class="form-control" placeholder="60"   />
-    </div>
-  </div>
-</div>
-    </div>
-    <?php } ?>
-
-                      <!-- End of Speaker -->
                       <?php 
                       $btn = $room_data->id;
                       
@@ -391,11 +403,11 @@
                           <th>Name</th>
                           <th>Block Name</th>
                           <th>seating_capacity</th>
-                          <th>Room Type</th>
+                          <th>Block Name</th>
                           <th>Projector</th>
                           <th>WIFI</th>
-                          <th>No.of Systems</th>
                           <th>Speaker</th>
+                          <th>Systems</th>
                         </tr>  
                       </thead>
                       <tbody>
@@ -406,14 +418,15 @@
             ?>
 
             <tr>
-                        <td><?php echo $row->block_name;?></td>
+                
+                        <td><?php echo $row->name;?></td>        
                         <td><?php echo $row->floor;?></td>
                         <td><?php echo $row->seating_capacity;?></td>
-                        <td><?php echo $row->room_type;?></td>
+                        <td><?php echo $row->block_name;?></td>
                         <td><?php echo $row->projector;?></td>
                         <td><?php echo $row->wifi;?></td>
-                        <td><?php echo $row->systems;?></td>
                         <td><?php echo $row->speaker;?></td>
+                        <td><?php echo $row->systems;?></td>
                         <td id="id" style="display:none;"><?php echo $row->id;?></td>
                         <td class="font-weight-medium">
                         <a class="badge badge-success edit_btn" href="<?php echo base_url(); ?>Dashboard/open_listform/<?php echo $row->id;?>">Edit</a>

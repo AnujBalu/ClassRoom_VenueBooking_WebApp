@@ -3,6 +3,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 
 $route['Dashboard/open_listform/(:any)'] = "/Dashboard/open_listform/$1";
 $route['Dashboard/room_type_data/(:any)'] = "/Dashboard/room_type_data/$1";
+$route['Dashboard/academic_schedule/(:any)'] = "/Dashboard/academic_schedule/$a";
 $route['default_controller'] = 'Dashboard';
 $route['404_override'] = '';
 $route['translate_uri_dashes'] = FALSE;

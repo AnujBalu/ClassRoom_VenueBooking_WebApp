@@ -38,10 +38,7 @@
         
        var speaker = document.getElementById("speaker");
        var no_of_speaker = document.getElementById("no_of_speaker");
-       if(speaker.selected == true  ){
-        no_of_speaker.style.display="block";
-       }
-       else if(speaker.checked == true){
+       if(speaker.checked == true){
         no_of_speaker.style.display="block";
        }
        else{
@@ -58,6 +55,19 @@
         else{
           new_other.style.display="none";
         }
+      }
+
+      function faculty_or_student(){
+        var student = document.getElementById("Student");
+        var faculty = document.getElementById("Faculty");
+        if(student.checked == true){
+          student_user.style.display="block";
+          faculty_user.style.display="none";
+       }
+       else if (faculty.checked == true){
+        student_user.style.display="none";
+        faculty_user.style.display="block";
+       }
       }
   </script>
 
