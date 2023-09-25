@@ -17,7 +17,7 @@
                           <div class="col-sm-3">
                             <div class="form-check">
                               <label class="form-check-label">
-                                <input type="radio" name="user" class="form-check-input" id="Faculty" value="YES"  onclick="faculty_or_student()">
+                                <input type="radio" name="user" class="form-check-input" id="Faculty" value="faculty"  onclick="faculty_or_student()">
                                 Faculty
                               </label>
                             </div>
@@ -25,7 +25,7 @@
                           <div class="col-sm-3">
                             <div class="form-check">
                               <label class="form-check-label">
-                                <input type="radio" class="form-check-input" name="user" id="Student" value="NO" onclick="faculty_or_student()">
+                                <input type="radio" class="form-check-input" name="user" id="Student" value="Student" onclick="faculty_or_student()">
                                 Student
                               </label>
                             </div>
@@ -123,11 +123,21 @@
                         </div>
                       </div>
                       <div class="row">
+
+                      <div class="col-md-6">
+                        <div class="form-group row">
+                          <label class="col-sm-3 col-form-label">Room Type</label>
+                          <div class="col-sm-9">
+                            <input type="textarea" name="room_type" class="form-control" placeholder="" />
+                          </div>
+                        </div>
+                      </div>
+
                        <div class="col-md-6">
                          <div class="form-group row">
-                           <label for="event_id" class="col-sm-3 form-label">Room Type</label>
+                           <label for="event_id" class="col-sm-3 form-label">Proposal</label>
                            <div class="col-sm-9">
-                              <input class="form-control" name="event" list="datalistOptions1" id="event_id" onchange="change(this.value)" placeholder="Events">
+                              <input class="form-control" name="proposal" list="datalistOptions1" id="event_id" onchange="change(this.value)" placeholder="Events">
                              <datalist id="datalistOptions1">
                               <option>Academics</option>
                               <option>Interview</option>
@@ -153,14 +163,6 @@
                         </div>
                     </div>
                     
-                      <div class="col-md-6">
-                        <div class="form-group row">
-                          <label class="col-sm-3 col-form-label">Proposal</label>
-                          <div class="col-sm-9">
-                            <input type="textarea" name="venue" class="form-control" placeholder="Reason" />
-                          </div>
-                        </div>
-                      </div>
 
                       <div class="col-md-6">
                         <div class="form-group row">

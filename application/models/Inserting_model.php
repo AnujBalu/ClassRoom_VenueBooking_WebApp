@@ -3,7 +3,11 @@
 class Inserting_model extends CI_Model{
     function form_info($data){
         $this->load->database();
+        
+		echo "<script>console.log('Debug Objects: " . $para. "' );</script>";
         $this->db->insert('form',$data);
+        
+		echo "<script>console.log('Debug Objects: " . $para. "' );</script>";
     }
     public function select()  
       {  
@@ -15,6 +19,7 @@ class Inserting_model extends CI_Model{
 
     
     function room_info($id,$room_data){
+      
         $this->load->database();
 
         $block_name = $this->db->get('block_name');
@@ -24,10 +29,10 @@ class Inserting_model extends CI_Model{
           }
         };
 
-        $name = $this->db->get('room_type');
-        foreach ($name->result() as $row){
-          if ($room_data['name'] == $row->name){
-              $room_data['name']= $row->room_type_id;
+        $room_type = $this->db->get('room_type');
+        foreach ($room_type->result() as $row){
+          if ($room_data['room_type'] == $row->name){
+              $room_data['room_type']= $row->room_type_id;
           }
         };
 
@@ -43,10 +48,10 @@ class Inserting_model extends CI_Model{
               $room_data['seating_capacity']= $row->seating_capacity_id;
           }
         };
+        //echo "<script>console.log('Debug Objects1: " . $id. "' );</script>";
 
         if ($id==""){
           $this->db->insert('room_info',$room_data);
-          $this->db->insert('available_room',$room_data);
         }
         else{
           $this->db->where('id',$id);
@@ -70,11 +75,11 @@ class Inserting_model extends CI_Model{
           }
         };
 
-        $name = $this->db->get('room_type');
-        foreach ($name->result() as $row){
+        $room_type = $this->db->get('room_type');
+        foreach ($room_type->result() as $row){
           foreach ($query->result() as $col){
-            if ($col->name == $row->room_type_id){
-                $col->name = $row->name;
+            if ($col->room_type == $row->room_type_id){
+                $col->room_type = $row->name;
             };
           }
         };
@@ -101,7 +106,11 @@ class Inserting_model extends CI_Model{
 
     public function room_type_name()  
       {  
-         $query = $this->db->get('room_type');  
+
+
+         $query = $this->db->get('room_info');  
+
+        
          return $query;  
       }
     
@@ -151,7 +160,7 @@ class Inserting_model extends CI_Model{
       
     }
 
-    public function allocated_room_insert($alloted_room_data){
+    public function allocated_room_insert($alloted_room_data,$para){
       $this->load->database();
 
         $department = $this->db->get('department');
@@ -168,21 +177,27 @@ class Inserting_model extends CI_Model{
           }
         };
 
-        $room_name = $this->db->get('room_type');
-        foreach ($room_name->result() as $row){
-          if ($alloted_room_data['room_name'] == $row->name){
-              $alloted_room_data['room_name']= $row->room_type_id;
-          }
-        };
-
-        $available_room = $this->db->get('available_room');
+        $available_room = $this->db->get('room_info');
         foreach ($available_room  ->result() as $row){
-          if ($alloted_room_data['room_name'] == $row->name){
-            $this->db->insert('alloted_room',$alloted_room_data);
-            $this->db->where('available_room_id', $row->available_room_id);
-            $this->db->delete('available_room');
+          if ($alloted_room_data['room_name'] == $row->room_name){
+            $this->db->insert('academic_classroom_booking',$alloted_room_data);
+            $this->db->where('id', $row->id);
           }
         };
+        if($para != ""){
+
+          $allotment_available = $this->db->get_where('academic_classroom_booking', array('alloted_room_id' => $para))->row();
+          $room_info = $this->db->get('room_info');
+          foreach ($room_info->result() as $row){
+              if ($allotment_available->room_name == $row->name){          
+                  $this->db->where('alloted_room_id', $para);
+                  $this->db->delete('academic_classroom_booking');
+                }
+              };
+            };
+      
+        
+        
         
 
     }
@@ -191,7 +206,7 @@ class Inserting_model extends CI_Model{
 
       $this->load->database();
 
-      $query = $this->db->get('alloted_room');  
+      $query = $this->db->get('academic_classroom_booking');  
 
       $department = $this->db->get('department');
         foreach ($department->result() as $row){
@@ -223,25 +238,43 @@ class Inserting_model extends CI_Model{
 
       return $query; 
     }
-    public function get_available_slots($available){
+    public function get_available_slots($date){
       
         $this->load->database();
-        $query = $this->db->get('available_room');
+        $query = $this->db->get('room_info');
+        $alloted = $this->db->get('academic_classroom_booking');
+
+        foreach ($query->result() as $col){
+        foreach ($alloted->result() as $row){  
+          
+            
+          echo "<script>console.log('star: " . $col->room_name. "' );</script>";
+
+          if(($date >= $row->from_date) and ($date <= $row->to_date) and ($row->room_name == $col->room_name)){
+            $col->room_name = null;
+            }
+          else{
+            if(($row->room_name == $col->room_name)){
+            }
+            }
+          };
+
+          }
 
         $block_name = $this->db->get('block_name');
         foreach ($block_name->result() as $row){
           foreach ($query->result() as $col){
-            if ($col->block_name == $row->block_name_id){
+            if (( $col->block_name == $row->block_name_id )){
                 $col->block_name = $row->name;
             };
           }
         };
 
-        $name = $this->db->get('room_type');
-        foreach ($name->result() as $row){
+        $room_type = $this->db->get('room_type');
+        foreach ($room_type->result() as $row){
           foreach ($query->result() as $col){
-            if ($col->name == $row->room_type_id){
-                $col->name = $row->name;
+            if ($col->room_type == $row->room_type_id){
+                $col->room_type = $row->name;
             };
           }
         };
@@ -264,6 +297,7 @@ class Inserting_model extends CI_Model{
           }
         };
         return $query;
+      
 
     }
 }

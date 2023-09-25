@@ -1,219 +1,110 @@
 
-      <!-- partial -->
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-<title>Bootstrap Table with Add and Delete Row Feature</title>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto|Varela+Round|Open+Sans">
-<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css">
-<link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
-<script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"></script>
-<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"></script>
-<link rel="stylesheet" type="text/css" href="css\vertical-layout-light\table_style.css">
+
+
+
+
+
+
+
+
+
+  <head>
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <style>
-body {
-    color: #404E67;
-    background: #F5F7FA;
-    font-family: 'Open Sans', sans-serif;
+div.scrollmenu {
+  background-color: #333;
+  overflow: auto;
+  white-space: nowrap;
 }
-.table-wrapper {
-    width: 1000px;
-    margin: 30px auto;
-    background: #fff;
-    padding: 20px;  
-    box-shadow: 0 1px 1px rgba(0,0,0,.05);
+
+div.scrollmenu a {
+  display: inline-block;
+  color: white;
+  text-align: center;
+  padding: 7px;
+  text-decoration: none;
 }
-.table-title {
-    padding-bottom: 10px;
-    margin: 0 0 10px;
+
+div.scrollmenu a:hover {
+  background-color: #777;
 }
-.table-title h2 {
-    margin: 6px 0 0;
-    font-size: 22px;
+a {
+  text-decoration: none;
+  display: inline-block;
+  padding: 4px 2px;
 }
-.table-title .add-new {
-    float: right;
-    height: 30px;
-    font-weight: bold;
-    font-size: 12px;
-    text-shadow: none;
-    min-width: 200px;
-    border-radius: 2px;
-    line-height: 25px;
+
+a:hover {
+  background-color: #ddd;
+  color: black;
 }
-.table-title .add-new i {
-    margin-right: 4px;
+
+.previous {
+  background-color: #04AA6D;
+  color: black;
 }
-table.table {
-    table-layout: fixed;
+
+.next {
+  background-color: #04AA6D;
+  color: white;
 }
-table.table tr th, table.table tr td {
-    border-color: #e9e9e9;
-}
-table.table th i {
-    font-size: 200px;
-    margin: 0 5px;
-    cursor: pointer;
-}
-table.table th:last-child {
-    width: 55px;
-}
-table.table td a {
-    cursor: pointer;
-    display: inline-block;
-    margin: 0 5px;
-    min-width: 50px;
-}    
-table.table td a.add {
-    color: #27C46B;
-}
-table.table td a.edit {
-    color: #FFC107;
-}
-table.table td a.delete {
-    color: #E34724;
-}
-table.table td i {
-    font-size: 19px;
-}
-table.table td a.add i {
-    font-size: 24px;
-    margin-right: -1px;
-    position: relative;
-    top: 3px;
-}    
-table.table .form-control {
-    height: 50px;
-    line-height: 32px;
-    box-shadow: none;
-    border-radius: 2px;
-}
-table.table .form-control.error {
-    border-color: #f50000;
-}
-table.table td .add {
-    display: none;
+
+.round {
+  border-radius: 30%;
 }
 </style>
-<script>
-$(document).ready(function(){
-  $('[data-toggle="tooltip"]').tooltip();
-  var actions = $("table td:last-child").html();
-  // Append table with add row form on add new button click
-    $(".add-new").click(function(){
-    $(this).attr("disabled", "disabled");
-    var index = $("table tbody tr:last-child").index();
-        var row = '<tr>' +
-            '<td><input type="text" class="form-control" name="venue" id="venue"></td>' +
-            '<td><input type="text" class="form-control" name="Name" id="Name"></td>' +
-            '<td><input type="text" class="form-control" name="Faculty Id" id="Faculty Id"></td>' +
-            '<td><input type="text" class="form-control" name="Department" id="Department"></td>' +
-            '<td><input type="text" class="form-control" name="year" id="year"></td>' +
-            '<td><input type="text" class="form-control" name="From time" id="From time"></td>' +
-            '<td><input type="text" class="form-control" name="To time" id="To time"></td>' +
-            '<td><input type="text" class="form-control" name="From Date" id="From Date"></td>' +
-            '<td><input type="text" class="form-control" name="To Date" id="To Date"></td>' +
-            '<td><input type="text" class="form-control" name="Event" id="Event"></td>' +
-      '<td>' + actions + '</td>' +
-        '</tr>';
-      $("table").append(row);   
-    $("table tbody tr").eq(index + 1).find(".add, .edit").toggle();
-        $('[data-toggle="tooltip"]').tooltip();
-    });
-  // Add row on add button click
-  $(document).on("click", ".add", function(){
-    var empty = false;
-    var input = $(this).parents("tr").find('input[type="text"]');
-        input.each(function(){
-      if(!$(this).val()){
-        $(this).addClass("error");
-        empty = true;
-      } else{
-                $(this).removeClass("error");
-            }
-    });
-    $(this).parents("tr").find(".error").first().focus();
-    if(!empty){
-      input.each(function(){
-        $(this).parent("td").html($(this).val());
-      });     
-      $(this).parents("tr").find(".add, .edit").toggle();
-      $(".add-new").removeAttr("disabled");
-    }   
-    });
-  // Edit row on edit button click
-  $(document).on("click", ".edit", function(){    
-        $(this).parents("tr").find("td:not(:last-child)").each(function(){
-      $(this).html('<input type="text" class="form-control" value="' + $(this).text() + '">');
-    });   
-    $(this).parents("tr").find(".add, .edit").toggle();
-    $(".add-new").attr("disabled", "disabled");
-    });
-  // Delete row on delete button click
-  $(document).on("click", ".delete", function(){
-        $(this).parents("tr").remove();
-    $(".add-new").removeAttr("disabled");
-    });
-});
-</script>
-
-</script>
+</style>
 </head>
-<body>
-       
-    <!-- input tag -->
-   
-<div class="container-lg">
-    <div class="table-responsive">
-        <div class="table-wrapper">
-            <div class="table-title">
-                <div class="row">
-                    <div class="col-sm-8"><h2>Employee <b>Details</b></h2></div>
-                    <div class="col-sm-4">
-                       <div class="table-striped"><center> <button type="button" class="btn btn-info add-new"><i class="center"></i> Add New</button></center></div>
-                    </div>
-                </div>
-            </div>
-            <table class="table table-bordered table-responsive">
-                <thead>
-                    <tr>
-                        
-                        <th>Name</th>
-                        <th>Faculty Id</th>
-                        <th>E-mail</th>
-                        <th>Year</th>
-                        <th>Department</th>
-                        <th>Event</th>
-                        <th>Venue</th>
-                        <th>Duration</th>
-                        <th>From time</th>
-                        <th>To time</th>
-                        <th>From date</th>
-                        <th>To date</th>
-                        <th>Event</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <?php  
+
+<div class="scrollmenu">
+<div class="row">
+            <div class="col-md-12 grid-margin stretch-card">
+              <div class="card">
+                <div class="card-body">
+                  <p class="card-title mb-0">Recent booking</p>
+                  <div class="table-responsive">
+                    <div class="table table-hover">
+                    <table id="myTable" class="table table-striped table-borderless">
+                      <thead>
+                        <tr>
+                          <th>Name</th>
+                          <th>Id</th>
+                          <th>E mail</th>
+                          <th>Capacity</th>
+                          <th>Room Type</th>
+                          <th>Proposal</th>
+                          <th>From Date</th>
+                          <th>To Date</th>
+                          <th>From Time</th>
+                          <th>To Time</th>
+                          <th>Projector</th>
+                          <th>WIFI</th>
+                          <th>Systems</th>
+                          <th>Speakers</th>
+                
+                        </tr>  
+                      </thead>
+                      <tbody>
+                      <?php  
         foreach ($h->result() as $row)  
         {  
             ?>
 
             <tr>
                         <td><?php echo $row->name;?></td>
-                        <td><?php echo $row->faculty_id;?></td>
+                        <td><?php echo $row->person_id;?></td>
                         <td><?php echo $row->email;?></td>
-                        <td><?php echo $row->year;?></td>
-                        <td><?php echo $row->dept;?></td>
-                        <td><?php echo $row->event;?></td>
-                        <td><?php echo $row->venue;?></td>
-                        <td><?php echo $row->duration;?></td>
+                        <td><?php echo $row->capacity;?></td>
+                        <td><?php echo $row->room_type;?></td>
+                        <td><?php echo $row->proposal;?></td>
                         <td><?php echo $row->f_date;?></td>
                         <td><?php echo $row->t_date;?></td>
                         <td><?php echo $row->f_time;?></td>
                         <td><?php echo $row->t_time;?></td>
+                        <td><?php echo $row->projector;?></td>
+                        <td><?php echo $row->wifi;?></td>
+                        <td><?php echo $row->systems;?></td>
+                        <td><?php echo $row->speaker;?></td>
                         <td>
                             
                             <a class="edit" title="Edit" data-toggle="tooltip"><i class="material-icons">&#xE254;</i></a>
@@ -222,27 +113,26 @@ $(document).ready(function(){
                     </tr>
         <?php }  
     ?>
-    
-                    
-                    <script src="./style.css"></script>
-                </tbody>
-               
-            </table>
-            <a href="#" class="previous">&laquo; Previous</a>
-            <a href="#" class="next">Next &raquo;</a>
-            <a href="#" class="previous round">&#8249;</a>
-            <a href="#" class="next round">&#8250;</a>
-        </div>
-    </div>
-</div>   
+                      </tbody>
+                    </table>
 
+                    <body>
+
+
+<a href="#" class="previous">&laquo; Previous</a>
+<a href="#" class="next">Next &raquo;</a>
+
+<a href="#" class="previous round">&#8249;</a>
+<a href="#" class="next round">&#8250;</a>
+  
 </body>
-</html>
-        <!-- partial -->
-      </div>
+
+                    </div>
+                  </div>
+                </div>
       <!-- main-panel ends -->
     </div>
     <!-- page-body-wrapper ends -->
+    
   </div>
-  <!-- container-scroller -->
- 
+</div>

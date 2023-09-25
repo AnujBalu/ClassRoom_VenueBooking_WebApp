@@ -14,13 +14,28 @@
 
                        <!-- End of Name -->
 
+                       
                       <!-- Starting of Name -->
                     <div class="row">
                       <div class="col-md-6">
                           <div class="form-group row">
-                            <label class="col-sm-4 col-form-label">Name</label>
+                            <label class="col-sm-4 col-form-label">Room Name</label>
                             <div class="col-sm-8">
-                                <input class="form-control" value="<?php echo $room_data->name; ?>" name="room_type" list="datalistOptions3" id="room_type" placeholder="EX : Seminar Hall" required >
+                                <input class="form-control" value="<?php echo $room_data->room_name; ?>" name="room_name" id="room_name" placeholder="EX : Seminar Hall" required >
+                             
+                            </div>
+                          </div>
+                        </div>
+
+                      <!-- End of Name -->
+
+                      <!-- Starting of Name -->
+
+                      <div class="col-md-6">
+                          <div class="form-group row">
+                            <label class="col-sm-4 col-form-label">Room Type</label>
+                            <div class="col-sm-8">
+                                <input class="form-control" value="<?php echo $room_data->room_type; ?>" name="room_type" list="datalistOptions3" id="room_type" placeholder="EX : Seminar Hall" required >
                               <datalist id="datalistOptions3">
                               <?php  
                                   foreach ($room_type->result() as $row)  
@@ -33,8 +48,10 @@
                           </div>
                         </div>
 
+                        </div>
                       <!-- End of Name -->
-                    <!-- Starting of floor --> 
+                    <!-- Starting of floor -->
+                    <div class="row"> 
                     <div class="col-md-6">
                         <div class="form-group row">
                           <label class="col-sm-4 col-form-label">Floor</label>
@@ -52,10 +69,10 @@
                         </div>
                       </div>
 
-                    </div>
+                   
                       <!-- End of floor --> 
                       <!-- Starting of Seating Capacity -->
-                    <div class="row">
+                    
 
                       <div class="col-md-6">
                         <div class="form-group row">
@@ -74,10 +91,12 @@
                         </div>
                       </div>
 
+                      </div>
                       <!-- End of Seating Capacity -->
 
 
                       <!-- Starting of Block name -->
+                      <div class="row">
                       <div class="col-md-6">
                         <div class="form-group row">
                           <label class="col-sm-4 col-form-label">Block Name</label>
@@ -95,8 +114,8 @@
                         </div>
                       </div>
                       
-                       
                       </div>
+                     
 
                     <!-- End of block name -->
 
@@ -400,7 +419,8 @@
                     <table class="table table-striped table-borderless">
                       <thead>
                         <tr>
-                          <th>Name</th>
+                          <th>Room Name</th>
+                          <th>Room type</th>
                           <th>Block Name</th>
                           <th>seating_capacity</th>
                           <th>Block Name</th>
@@ -415,11 +435,14 @@
                       <?php  
         foreach ($info->result() as $row)  
         {  
+          echo "<script>console.log('Debug Objects: " .$row->room_name. "' );</script>";
+
             ?>
 
             <tr>
                 
-                        <td><?php echo $row->name;?></td>        
+                        <td><?php echo $row->room_name;?></td>
+                        <td><?php echo $row->room_type;?></td>
                         <td><?php echo $row->floor;?></td>
                         <td><?php echo $row->seating_capacity;?></td>
                         <td><?php echo $row->block_name;?></td>
@@ -429,7 +452,7 @@
                         <td><?php echo $row->systems;?></td>
                         <td id="id" style="display:none;"><?php echo $row->id;?></td>
                         <td class="font-weight-medium">
-                        <a class="badge badge-success edit_btn" href="<?php echo base_url(); ?>Dashboard/open_listform/<?php echo $row->id;?>">Edit</a>
+                        <a class="badge badge-success edit_btn" href="<?php echo base_url(); ?>Dashboard/add_room/<?php echo $row->id;?>">Edit</a>
                         <a class="badge badge-danger" href="<?php echo base_url(); ?>Dashboard/room_type_deletes/<?php echo $row->id;?>">Delete</a>
                             
                         </td>

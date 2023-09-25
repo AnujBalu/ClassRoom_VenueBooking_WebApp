@@ -47,7 +47,7 @@ public function method1($param1="")
 		$this->load->view('Admin_1/Templates/java_script');
 		
 	}
-	public function open_listform($param1='')
+	public function add_room($param1='')
 	{
 		$this->load->database();  
 	   	$this->load->model('Inserting_model'); 
@@ -65,10 +65,10 @@ public function method1($param1="")
           }
         };
 
-        $name = $this->db->get('room_type');
-        foreach ($name->result() as $row){
-            if ($data['room_data']->name == $row->room_type_id){
-                $data['room_data']->name = $row->name;
+        $room_type = $this->db->get('room_type');
+        foreach ($room_type->result() as $row){
+            if ($data['room_data']->room_type == $row->room_type_id){
+                $data['room_data']->room_type = $row->name;
             };
         };
 
@@ -87,7 +87,7 @@ public function method1($param1="")
         };
 
 
-		//echo "<script>console.log('Debug Objects: " . $data['room_data']->name . "' );</script>";
+		//echo "<script>console.log('Debug Objects: " .$data['info']->seating_capacity. "' );</script>";
 		//Calling Model to Insert data
 		$data['room_type'] = $this->Inserting_model->room_type_name();
 		$data['block_name'] = $this->Inserting_model->block_name();	
@@ -99,39 +99,46 @@ public function method1($param1="")
 		$this->load->view('Admin_1/Templates/style_script');
 		$this->load->view('Admin_1/Templates/navbar');
 		$this->load->view('Admin_1/Templates/side_bar');
-		$this->load->view('Admin_1/list_form',$data);
+		$this->load->view('Admin_1/add_room',$data);
 		$this->load->view('Admin_1/Templates/java_script');
 		
 	}
 
-	public function academic_schedule($para="")
+	public function class_room_booking($para="")
 	{	
 		$this->load->database();  
 	   	$this->load->model('Inserting_model');  
 	   	$data['a_s'] = $this->Inserting_model->get_academic_schedule();
 		$this->load->helper('url');
-		if($para == 'all'){
-			$data['available_slots'] = $this->Inserting_model->get_available_slots($para);
-		}
-		elseif($para == 'available_class_room'){
-			$data['available_slots'] = $this->Inserting_model->get_available_slots($para);
-		}
-		else{
-			$data['available_slots'] = $this->Inserting_model->get_available_slots($para);
-		}
 
 
 		//Calling Model to Insert data
-		$data['room_type'] = $this->Inserting_model->room_type_name();
+		$data['class_type'] = $this->Inserting_model->room_type_name();
 		$data['dept'] = $this->Inserting_model->dept_name();	
 		$data['year'] = $this->Inserting_model->year_name();
 
 		$this->load->view('Admin_1/Templates/style_script');
 		$this->load->view('Admin_1/Templates/navbar');
 		$this->load->view('Admin_1/Templates/side_bar');
-		$this->load->view('Admin_1/academic_schedule',$data);
+		$this->load->view('Admin_1/class_room_booking',$data);
 		$this->load->view('Admin_1/Templates/java_script');
 		
+	}
+	public function available_class_room(){
+		$this->load->helper('url');
+
+		
+		$this->load->database();  
+	   	$this->load->model('Inserting_model'); 
+		$date = date('Y-m-d');
+		$data['available_slots'] = $this->Inserting_model->get_available_slots($date);
+		//echo "<script>console.log('Debug Objects: " . $dd. "' );</script>";
+
+		$this->load->view('Admin_1/Templates/style_script');
+		$this->load->view('Admin_1/Templates/navbar');
+		$this->load->view('Admin_1/Templates/side_bar');
+		$this->load->view('Admin_1/available_class_room',$data);
+		$this->load->view('Admin_1/Templates/java_script');
 	}
 
 
@@ -139,7 +146,17 @@ public function method1($param1="")
         //this array is used to get fetch data from the view page.  
 		$this->load->helper('url');
 
-		$events = $this->input->post('event');
+		$name = $this->input->post('user');
+		if ($name='faculty'){
+			$person_name = $this->input->post('faculty_name');
+			$person_id = $this->input->post('faculty_id');
+		}
+		else{
+			$person_name = $this->input->post('Student_name');
+			$person_id = $this->input->post('Student_id');
+		};
+
+		$events = $this->input->post('proposal');
 		if ($events =="Others"){
 			$events = $this->input->post('others_option');
 		};
@@ -152,28 +169,43 @@ public function method1($param1="")
 		else{
 			$systems ="No";
 		};
-
+		$speaker = $this->input->post('speaker');
+		if ($speaker=='YES'){
+			$speaker = $this->input->post('no_of_speaker');
+		}
+		else{
+			$speaker = "NO";
+		};
+		$from_date_time = $this->input->post('from_date_time');
+		$f_dateTime = new DateTime($from_date_time);
+		$f_date = $f_dateTime->format('Y-m-d');
+		$f_time = $f_dateTime->format('H:i:s');
+		//$xy = $this->input->post('times');
+		$to_date_time = $this->input->post('to_date_time');
+		$t_dateTime = new DateTime($to_date_time);
+		$t_date = $t_dateTime->format('Y-m-d');
+		$t_time = $t_dateTime->format('H:i:s');
 		$hi = $this->input->post('Register');
-		echo $hi;
         $data = array(  
-                        'name'     => $this->input->post('name'),
-						'year'     => $this->input->post('year'),
-						'dept'     => $this->input->post('dept'),						
+                        'name'     => $person_name,
+						'person_id'     => $person_id,
+						'email'     => $this->input->post('email'),						
 						'capacity'     => $this->input->post('capacity'),
-						'event'     => $events,
-						'venue'     => $this->input->post('venue'),
-						'duration'     => $this->input->post('duration'),
-						'date'     => $this->input->post('date'),
-						'f_time'     => $this->input->post('f_time'),
-						't_time'     => $this->input->post('t_time'),
+						'room_type'     => $this->input->post('room_type'),
+						'proposal'     => $this->input->post('proposal'),
+						'f_date'     => $f_date,
+						't_date'     => $t_date,
+						'f_time'     => $f_time,
+						't_time'     => $t_time,
 						'projector'     => $this->input->post('projector'),
 						'wifi'     => $this->input->post('wifi'),
 						'systems'     => $systems,
+						'speaker'     => $speaker,
                         );   
         
-						
+		echo "<script>console.log('Debug Objects: " . $data['f_date']. "' );</script>";
+				
 		$this->load->model("Inserting_model");
-		echo $data;
 		$this->Inserting_model->form_info($data);
 		
         redirect('Dashboard/open_form');
@@ -210,18 +242,19 @@ public function method1($param1="")
                         'block_name'     => $this->input->post('block_name'),
 						'floor'     => $this->input->post('floor'),						
 						'seating_capacity'     => $this->input->post('seating_capacity'),
-						'name'     => $this->input->post('room_type'),
+						'room_name'     => $this->input->post('room_name'),
+						'room_type'     => $this->input->post('room_type'),
 						'projector'     => $this->input->post('projector'),
 						'wifi'     => $this->input->post('wifi'),
 						'systems'     => $systems,
 						'speaker'     => $speaker,
                         );   
-        
+		//echo "<script>console.log('Debug Objects1: " . $room_data['room_type']. "' );</script>";
 		$this->load->model("Inserting_model");
 		$this->Inserting_model->room_info($para,$room_data);
 		
 						
-        redirect('Dashboard/open_listform');
+        redirect('Dashboard/add_room');
 	}
 
 	public function room_type_deletes($para=""){
@@ -229,12 +262,13 @@ public function method1($param1="")
 		$this->load->database();
 		$this->db->where('id', $para);
        	$this->db->delete('room_info');
-       	redirect('Dashboard/open_listform');
+       	redirect('Dashboard/add_room');
 	}
 
-	public function allocated_room_form(){
+	public function allocated_room_form($para=""){
         //this array is used to get fetch data from the view page. 
-		 
+		//echo "<script>console.log('Debug Objects: " . $para. "' );</script>";
+	
 		$this->load->helper('url');
 		$from_date_time = $this->input->post('from_date_time');
 		$f_dateTime = new DateTime($from_date_time);
@@ -243,7 +277,7 @@ public function method1($param1="")
 		//$xy = $this->input->post('times');
 		$to_date_time = $this->input->post('to_date_time');
 		$t_dateTime = new DateTime($to_date_time);
-		$t_date = $t_dateTime->format('Y-d-m');
+		$t_date = $t_dateTime->format('Y-m-d');
 		$t_time = $t_dateTime->format('H:i:s');
 
 		$alloted_room_data = array(
@@ -257,10 +291,11 @@ public function method1($param1="")
 			);  
 		
 		$this->load->model("Inserting_model");
+		//echo "<script>console.log('Debug Objects: " . $para. "' );</script>";
+		$this->Inserting_model->allocated_room_insert($alloted_room_data,$para);
 		
-		$this->Inserting_model->allocated_room_insert($alloted_room_data);
 		
-		redirect('Dashboard/academic_schedule');
+		redirect('Dashboard/class_room_booking');
 		
 	}
 	

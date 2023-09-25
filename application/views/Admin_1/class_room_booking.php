@@ -6,7 +6,7 @@
             <div class="col-12 grid-margin">
               <div class="card">
                 <div class="card-body">
-                  <h4 class="card-title bg-primary p-3" style="border-radius:15px; color:whitesmoke;">Insert Room Info</h4>
+                  <h4 class="card-title bg-primary p-3" style="border-radius:15px; color:whitesmoke;">Rooms</h4>
                   <form class="form-sample" method="post" action="<?php echo base_url(); ?>Dashboard/allocated_room_form">
                     <p class="card-description">
       
@@ -64,10 +64,10 @@
                             <input type="text" value="<?php echo $room_data->room_name; ?>" name="room_name" list="datalistOptions3" class="form-control" placeholder="EX : CT203" />
                             <datalist id="datalistOptions3">
                               <?php  
-                                  foreach ($room_type->result() as $row)  
+                                  foreach ($class_type->result() as $row)  
                                   {  
                                       ?>
-                                <option><?php echo $row->name ?></option>
+                                <option><?php echo $row->room_name ?></option>
                               <?php } ?>
                             </select>
                           </div>
@@ -122,10 +122,12 @@
                   </form>
                 </div>
               </div>
-            </div>            
-          </div>
-        </div>
+            </div> 
         <!-- content-wrapper ends -->
+
+
+        
+      
         <div class="row">
             <div class="col-md-12 grid-margin stretch-card">
               <div class="card">
@@ -167,7 +169,7 @@
                         <td style="display:none;">Approved</td>
                         <td style="display:none;">Rejected</td>
                         <td class="font-weight-medium">
-                        <a class="badge badge-success edit_btn" href="#">Edit</a>
+                        <a class="badge badge-danger" href="<?php echo base_url(); ?>Dashboard/allocated_room_form/<?php echo $row->alloted_room_id;?>">Delete</a>
                         <a class="badge badge-danger" href="#">Cancel</a> 
                         </td>
                     </tr>
@@ -183,69 +185,6 @@
   </div>
 
 
-
-
-        <!-- content-wrapper ends -->
-        <div class="row">
-            <div class="col-md-12 grid-margin stretch-card">
-              <div class="card">
-                <div class="card-body">
-                  <p class="card-title mb-0">Available Slot</p>
-
-                  <div class="dropdown show">
-                    <a class="btn btn-secondary dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                      ALL
-                    </a>
-
-                    <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
-                      <a class="dropdown-item" href="<?php echo base_url(); ?>Dashboard/academic_schedule/all">ALL</a>
-                      <a class="dropdown-item" href="<?php echo base_url(); ?>Dashboard/academic_schedule/available_class_room">Class Room</a>
-                      <a class="dropdown-item" href="#">Seminar Hall</a>
-                    </div>
-                  </div>
-
-                  
-
-                  <div class="table-responsive">
-                    <div class="table table-hover">
-                    <table class="table table-striped table-borderless">
-                      
-                    <thead>
-                        <tr>
-                          <th>Room Name</th>
-                          <th>Block Name</th>
-                          <th>Floor</th>
-                          <th>Seat Capacity</th>
-                        </tr>  
-                      </thead>
-                      <tbody>
-                      
-                      <?php  
-        foreach ($available_slots->result() as $row)  
-        {  
-            ?>
-
-            <tr>
-                        <td><?php echo $row->name;?></td>
-                        <td><?php echo $row->block_name;?></td>
-                        <td><?php echo $row->floor;?></td>
-                        <td><?php echo $row->seating_capacity;?></td>
-                        <td class="font-weight-medium">
-                        <a class="badge badge-success edit_btn" href="#">Edit</a>
-                        <a class="badge badge-danger" href="#">Cancel</a> 
-                        </td>
-                    </tr>
-                  <?php } ?>       
-                      </tbody>
-                    </table>
-                    </div>
-                  </div>
-                </div>
-      <!-- main-panel ends -->
-            </div>
-    <!-- page-body-wrapper ends -->
+           
   </div>
-
-
-
-                     
+        </div>
