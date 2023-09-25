@@ -7,7 +7,7 @@
         <a class="navbar-brand brand-logo-mini" href="index.html"><img src="<?php echo base_url()?>images/logo/login_logo.jpeg" alt="logo"/></a>
       </div>
       <div class="navbar-menu-wrapper d-flex align-items-center justify-content-end">
-        <button class="navbar-toggler navbar-toggler align-self-center" type="button" data-toggle="minimize">
+        <button class="navbar-toggler navbar-toggler align-self-center active" type="button" data-toggle="minimize">
           <span class="icon-menu"></span>
         </button>
         <ul class="navbar-nav mr-lg-2">

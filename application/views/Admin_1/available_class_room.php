@@ -38,8 +38,7 @@
                         <td><?php echo $row->floor;?></td>
                         <td><?php echo $row->seating_capacity;?></td>
                         <td class="font-weight-medium">
-                        <a class="badge badge-success edit_btn" href="#">Edit</a>
-                        <a class="badge badge-danger" href="#">Cancel</a> 
+                        <a class="badge badge-success edit_btn" href="<?php echo base_url()?>Dashboard/class_room_booking/<?php echo $row->id?>">Allocate</a> 
                         </td>
                     </tr>
                   <?php }

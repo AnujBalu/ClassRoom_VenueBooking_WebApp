@@ -108,7 +108,6 @@
                               <option>30</option>
                               <option>40</option>
                               <option>60</option>
-                              <option>72+15(chairs)</option>
                               <option>120</option>
                               <option>180</option>
                               <option>200</option>

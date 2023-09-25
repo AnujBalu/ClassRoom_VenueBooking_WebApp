@@ -55,32 +55,28 @@ public function method1($param1="")
 	   	$data['info'] = $this->Inserting_model->get_room_info();
 		$data['room_data'] = $this->db->get_where('room_info', array('id' => $param1))->row();
 	
-		
-		
-		$block_name = $this->db->get('block_name');
-        foreach ($block_name->result() as $row){
+		$this->db->select('block_name.*, room_type.*,floor.*,seating_capacity.*');
+        $this->db->from('block_name');
+        $this->db->join('room_type', 'room_type.room_type_id = block_name.block_name_id','left');
+        $this->db->join('floor', 'floor.floor_id = block_name.block_name_id','left');
+        $this->db->join('seating_capacity', 'seating_capacity.seating_capacity_id = block_name.block_name_id','right');
+
+        $query = $this->db->get();
+
+        foreach ($query->result() as $row){ 
+
             if ($data['room_data']->block_name == $row->block_name_id){
-                $data['room_data']->block_name = $row->name;
+                $data['room_data']->block_name = $row->block_name;
+          	};	
 
-          }
-        };
-
-        $room_type = $this->db->get('room_type');
-        foreach ($room_type->result() as $row){
             if ($data['room_data']->room_type == $row->room_type_id){
-                $data['room_data']->room_type = $row->name;
+                $data['room_data']->room_type = $row->room_type_name;
             };
-        };
 
-        $floor = $this->db->get('floor');
-        foreach ($floor->result() as $row){
             if ($data['room_data']->floor == $row->floor_id){
-                $data['room_data']->floor= $row->name;
+                $data['room_data']->floor= $row->floor_name;
             };
-        };
 
-        $seating_capacity = $this->db->get('seating_capacity');
-        foreach ($seating_capacity->result() as $row){
             if ($data['room_data']->seating_capacity == $row->seating_capacity_id){
                 $data['room_data']->seating_capacity = $row->capacity;
             };
@@ -107,10 +103,14 @@ public function method1($param1="")
 	public function class_room_booking($para="")
 	{	
 		$this->load->database();  
+		
 	   	$this->load->model('Inserting_model');  
 	   	$data['a_s'] = $this->Inserting_model->get_academic_schedule();
 		$this->load->helper('url');
+		$data['room_data'] = $this->db->get_where('room_info', array('id' => $para))->row();
 
+
+		//echo "<script>console.log('Debug Objects: " . $para. "' );</script>";
 
 		//Calling Model to Insert data
 		$data['class_type'] = $this->Inserting_model->room_type_name();
@@ -145,7 +145,7 @@ public function method1($param1="")
 	public function inserting_data(){
         //this array is used to get fetch data from the view page.  
 		$this->load->helper('url');
-
+		$date = date('Y-m-d');
 		$name = $this->input->post('user');
 		if ($name='faculty'){
 			$person_name = $this->input->post('faculty_name');
@@ -283,7 +283,7 @@ public function method1($param1="")
 		$alloted_room_data = array(
 			'dept'     => $this->input->post('department'),
 			'year'     => $this->input->post('year'),						
-			'room_name'     => $this->input->post('room_name'),
+			'alloted_room_data'     => $this->input->post('room_name'),
 			'from_date'     => $f_date,
 			'to_date'     => $t_date,
 			'from_time'     => $f_time,

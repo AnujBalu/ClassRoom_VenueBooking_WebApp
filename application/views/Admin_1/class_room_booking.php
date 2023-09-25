@@ -20,7 +20,7 @@
                         <div class="form-group row">
                           <label class="col-sm-4 col-form-label">Department</label>
                           <div class="col-sm-8">
-                          <input class="form-control" value="<?php echo $room_data->dept; ?>" name="department" list="datalistOptions1" id="department" placeholder="EX : CT">
+                          <input class="form-control"  name="department" list="datalistOptions1" id="department" placeholder="EX : CT">
                             <datalist id="datalistOptions1">
                               <?php  
                                   foreach ($dept->result() as $row)  
@@ -39,7 +39,7 @@
                         <div class="form-group row">
                           <label class="col-sm-4 col-form-label">Year</label>
                           <div class="col-sm-8">
-                          <input class="form-control" value="<?php echo $room_data->year; ?>" name="year" list="datalistOptions2" id="year" placeholder="EX : First floor">
+                          <input class="form-control"  name="year" list="datalistOptions2" id="year" placeholder="EX : First floor">
                               <datalist id="datalistOptions2">
                                   <?php  
                                       foreach ($year->result() as $row)  
@@ -96,28 +96,10 @@
                       </div>
 
                     <!-- End of Room Type -->
-                      <?php 
-                      $btn = $room_data->id;
-                      
-                      if ($btn == ""){
-                        echo $btn;
-                      ?>
+                     
 
                       <button type="submit" class="btn btn-primary ml-auto" >ADD</button>
-                        <?php } 
                         
-                        else{?>
-                        <div class="col-md-4">
-                        <div class="form-group row">
-                          <div class="col-sm-6">
-                          <button type="submit" class="btn btn-primary ml-auto" href="<?php echo base_url()?>Dashboard/allocated_room_insert/<?php echo $room_data->id ?>" >SAVE</button>
-                          </div>
-                          <div class="col-sm-6">
-                          <button type="submit" class="btn btn-primary ml-auto" >CANCEL</button>
-                          </div>
-                        </div>
-                      </div>
-                          <?php } ?>
                     </div>
                   </form>
                 </div>
@@ -170,7 +152,6 @@
                         <td style="display:none;">Rejected</td>
                         <td class="font-weight-medium">
                         <a class="badge badge-danger" href="<?php echo base_url(); ?>Dashboard/allocated_room_form/<?php echo $row->alloted_room_id;?>">Delete</a>
-                        <a class="badge badge-danger" href="#">Cancel</a> 
                         </td>
                     </tr>
                   <?php } ?>       

@@ -3,16 +3,15 @@
 class Inserting_model extends CI_Model{
     function form_info($data){
         $this->load->database();
-        
-		echo "<script>console.log('Debug Objects: " . $para. "' );</script>";
         $this->db->insert('form',$data);
         
-		echo "<script>console.log('Debug Objects: " . $para. "' );</script>";
     }
     public function select()  
       {  
-         $query = $this->db->get('form');  
-         return $query;  
+        $this->load->database();
+        
+        $query = $this->db->get('form');  
+        return $query;  
       }
 
     // ************************** Insert the data to Room Info **************************
@@ -22,31 +21,31 @@ class Inserting_model extends CI_Model{
       
         $this->load->database();
 
-        $block_name = $this->db->get('block_name');
-        foreach ($block_name->result() as $row){
-          if ($room_data['block_name'] == $row->name){
+        $this->db->select('block_name.*, room_type.*,floor.*,seating_capacity.*');
+        $this->db->from('block_name');
+        $this->db->join('room_type', 'room_type.room_type_id = block_name.block_name_id','left');
+        $this->db->join('floor', 'floor.floor_id = block_name.block_name_id','left');
+        $this->db->join('seating_capacity', 'seating_capacity.seating_capacity_id = block_name.block_name_id','right');
+
+        $query = $this->db->get();
+
+        foreach ($query->result() as $row){
+
+          if ($room_data['block_name'] == $row->block_name){
               $room_data['block_name']= $row->block_name_id;
-          }
-        };
+          };
 
-        $room_type = $this->db->get('room_type');
-        foreach ($room_type->result() as $row){
-          if ($room_data['room_type'] == $row->name){
+          if ($room_data['room_type'] == $row->room_type_name){
               $room_data['room_type']= $row->room_type_id;
-          }
-        };
+          };
 
-        $floor = $this->db->get('floor');
-        foreach ($floor->result() as $row){
-          if ($room_data['floor'] == $row->name){
+          if ($room_data['floor'] == $row->floor_name){
               $room_data['floor']= $row->floor_id;
-          }
-        };
-        $seating_capacity = $this->db->get('seating_capacity');
-        foreach ($seating_capacity->result() as $row){
+          };
+
           if ($room_data['seating_capacity'] == $row->capacity){
               $room_data['seating_capacity']= $row->seating_capacity_id;
-          }
+          };
         };
         //echo "<script>console.log('Debug Objects1: " . $id. "' );</script>";
 
@@ -63,39 +62,34 @@ class Inserting_model extends CI_Model{
     public function get_room_info()  
       {  
         $this->load->database();
+
+
+        
+        $this->db->select('block_name.*, room_type.*,floor.*,seating_capacity.*');
+        $this->db->from('block_name');
+        $this->db->join('room_type', 'room_type.room_type_id = block_name.block_name_id','left');
+        $this->db->join('floor', 'floor.floor_id = block_name.block_name_id','left');
+        $this->db->join('seating_capacity', 'seating_capacity.seating_capacity_id = block_name.block_name_id','right');
+
+        $query1 = $this->db->get();
         $query = $this->db->get('room_info'); 
-        
-        
-        $block_name = $this->db->get('block_name');
-        foreach ($block_name->result() as $row){
+
+        foreach ($query1->result() as $row){  
+          
           foreach ($query->result() as $col){
+
             if ($col->block_name == $row->block_name_id){
-                $col->block_name = $row->name;
+                $col->block_name = $row->block_name;
             };
-          }
-        };
 
-        $room_type = $this->db->get('room_type');
-        foreach ($room_type->result() as $row){
-          foreach ($query->result() as $col){
             if ($col->room_type == $row->room_type_id){
-                $col->room_type = $row->name;
+                $col->room_type = $row->room_type_name;
             };
-          }
-        };
 
-        $floor = $this->db->get('floor');
-        foreach ($floor->result() as $row){
-          foreach ($query->result() as $col){
             if ($col->floor == $row->floor_id){
-                $col->floor = $row->name;
+                $col->floor = $row->floor_name;
             };
-          }
-        };
 
-        $seating_capacity = $this->db->get('seating_capacity');
-        foreach ($seating_capacity->result() as $row){
-          foreach ($query->result() as $col){
             if ($col->seating_capacity == $row->seating_capacity_id){
                 $col->seating_capacity = $row->capacity;
             };
@@ -162,76 +156,86 @@ class Inserting_model extends CI_Model{
 
     public function allocated_room_insert($alloted_room_data,$para){
       $this->load->database();
+     
 
-        $department = $this->db->get('department');
-        foreach ($department->result() as $row){
-          if ($alloted_room_data['dept'] == $row->name){
-              $alloted_room_data['dept']= $row->dept_id;
-          }
-        };
+      $this->db->select('department.*, year.*');
+      $this->db->from('department');
+      $this->db->join('year', 'year.year_id = department.dept_id ');
 
-        $year = $this->db->get('year');
-        foreach ($year->result() as $row){
-          if ($alloted_room_data['year'] == $row->name){
-              $alloted_room_data['year']= $row->year_id;
-          }
-        };
-
-        $available_room = $this->db->get('room_info');
-        foreach ($available_room  ->result() as $row){
-          if ($alloted_room_data['room_name'] == $row->room_name){
-            $this->db->insert('academic_classroom_booking',$alloted_room_data);
-            $this->db->where('id', $row->id);
-          }
-        };
-        if($para != ""){
-
-          $allotment_available = $this->db->get_where('academic_classroom_booking', array('alloted_room_id' => $para))->row();
-          $room_info = $this->db->get('room_info');
-          foreach ($room_info->result() as $row){
-              if ($allotment_available->room_name == $row->name){          
-                  $this->db->where('alloted_room_id', $para);
-                  $this->db->delete('academic_classroom_booking');
-                }
-              };
-            };
+      $query1 = $this->db->get();
       
+      $query = $this->db->get('academic_classroom_booking');
+      
+      if($para != ""){
+
+                  
+        $this->db->where('alloted_room_id', $para);
+        $this->db->delete('academic_classroom_booking');
+      
+          };
+
+      $fdate = $alloted_room_data['from_date'];
+      $tdate = $alloted_room_data['to_date'];
+
+      $count = 0;
+      foreach ($query->result() as $date){
+        echo "<script>console.log('star start: ' );</script>";
+
+      if((($fdate > $date->to_date) or ($fdate < $date->from_date)) and (($tdate < $date->from_date) or ($tdate > $date->to_date)) and ($count<1) ) {     
+        echo "<script>console.log('from date: " . $fdate. "' );</script>";
+
+        echo "<script>console.log('to date: " . $tdate. "' );</script>";
+        echo "<script>console.log('ofd: " . $date->from_date. "' );</script>";
+        echo "<script>console.log('otd: " . $date->to_date. "' );</script>";
+
+        foreach ($query1->result() as $row){ 
+            
+              if ($alloted_room_data['dept'] == $row->dept_name){
+                  $alloted_room_data['dept']= $row->dept_id;
+              }
+
+              if ($alloted_room_data['year'] == $row->year_name){
+                  $alloted_room_data['year']= $row->year_id;
+              }
+            };
+            $this->db->insert('academic_classroom_booking',$alloted_room_data);
+              
+            $count = $count + 1;
+          }
+      else{
+          echo "<script>console.log('star start: ' );</script>";
+
+      };
+    }
         
-        
+      
         
 
     }
+
 
     public function get_academic_schedule(){
 
       $this->load->database();
 
+      $this->db->select('department.*, year.*');
+      $this->db->from('department');
+      $this->db->join('year', 'year.year_id = department.dept_id ');
+
+      $query1 = $this->db->get();
       $query = $this->db->get('academic_classroom_booking');  
 
-      $department = $this->db->get('department');
-        foreach ($department->result() as $row){
+      foreach ($query1->result() as $row){ 
           foreach ($query->result() as $col){
+
             if ($col->dept == $row->dept_id){
-                $col->dept = $row->name;
+                $col->dept = $row->dept_name;
             };
-          }
-        };
 
-        $year = $this->db->get('year');
-        foreach ($year->result() as $row){
-          foreach ($query->result() as $col){
             if ($col->year == $row->year_id){
-                $col->year = $row->name;
+                $col->year = $row->year_name;
             };
-          }
-        };
 
-        $room_name = $this->db->get('room_type');
-        foreach ($room_name->result() as $row){
-          foreach ($query->result() as $col){
-            if ($col->room_name == $row->room_type_id){
-                $col->room_name = $row->name;
-            };
           }
         };
 
@@ -248,7 +252,7 @@ class Inserting_model extends CI_Model{
         foreach ($alloted->result() as $row){  
           
             
-          echo "<script>console.log('star: " . $col->room_name. "' );</script>";
+          //echo "<script>console.log('star: " . $col->room_name. "' );</script>";
 
           if(($date >= $row->from_date) and ($date <= $row->to_date) and ($row->room_name == $col->room_name)){
             $col->room_name = null;
@@ -261,36 +265,29 @@ class Inserting_model extends CI_Model{
 
           }
 
-        $block_name = $this->db->get('block_name');
-        foreach ($block_name->result() as $row){
+        $this->db->select('block_name.*, room_type.*,floor.*,seating_capacity.*');
+        $this->db->from('block_name');
+        $this->db->join('room_type', 'room_type.room_type_id = block_name.block_name_id','left');
+        $this->db->join('floor', 'floor.floor_id = block_name.block_name_id','left');
+        $this->db->join('seating_capacity', 'seating_capacity.seating_capacity_id = block_name.block_name_id','right');
+
+        $query1 = $this->db->get(); 
+
+        foreach ($query1->result() as $row){  
           foreach ($query->result() as $col){
+
             if (( $col->block_name == $row->block_name_id )){
-                $col->block_name = $row->name;
+                $col->block_name = $row->block_name;
             };
-          }
-        };
 
-        $room_type = $this->db->get('room_type');
-        foreach ($room_type->result() as $row){
-          foreach ($query->result() as $col){
             if ($col->room_type == $row->room_type_id){
-                $col->room_type = $row->name;
+                $col->room_type = $row->room_type_name;
             };
-          }
-        };
 
-        $floor = $this->db->get('floor');
-        foreach ($floor->result() as $row){
-          foreach ($query->result() as $col){
             if ($col->floor == $row->floor_id){
-                $col->floor = $row->name;
+                $col->floor = $row->floor_name;
             };
-          }
-        };
 
-        $seating_capacity = $this->db->get('seating_capacity');
-        foreach ($seating_capacity->result() as $row){
-          foreach ($query->result() as $col){
             if ($col->seating_capacity == $row->seating_capacity_id){
                 $col->seating_capacity = $row->capacity;
             };
