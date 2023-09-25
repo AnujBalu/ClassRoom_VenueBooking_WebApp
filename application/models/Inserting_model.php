@@ -166,27 +166,23 @@ class Inserting_model extends CI_Model{
       
       $query = $this->db->get('academic_classroom_booking');
       
-      if($para != ""){
-
-                  
-        $this->db->where('alloted_room_id', $para);
-        $this->db->delete('academic_classroom_booking');
-      
-          };
 
       $fdate = $alloted_room_data['from_date'];
       $tdate = $alloted_room_data['to_date'];
 
       $count = 0;
+      $unique = 0;
+      $alert_msg = 0;
+      $is_name_in_form = false;
       foreach ($query->result() as $date){
-        echo "<script>console.log('star start: ' );</script>";
 
-      if((($fdate > $date->to_date) or ($fdate < $date->from_date)) and (($tdate < $date->from_date) or ($tdate > $date->to_date)) and ($count<1) ) {     
-        echo "<script>console.log('from date: " . $fdate. "' );</script>";
-
-        echo "<script>console.log('to date: " . $tdate. "' );</script>";
-        echo "<script>console.log('ofd: " . $date->from_date. "' );</script>";
-        echo "<script>console.log('otd: " . $date->to_date. "' );</script>";
+      if((($fdate > $date->to_date) or ($fdate < $date->from_date)) and (($tdate < $date->from_date) or ($tdate >$date->to_date)) and ($count<1) and ($alloted_room_data['room_name']== $date->room_name) and $para=="") {     
+        //echo "<script>console.log('from date: " .$alloted_room_data['room_name']. "' );</script>";
+        //echo "<script>console.log('to date: " . $date->room_name. "' );</script>";
+        //echo "<script>console.log('from date: " . $fdate. "' );</script>";
+        //echo "<script>console.log('to date: " . $tdate. "' );</script>";
+        //echo "<script>console.log('ofd: " . $date->from_date. "' );</script>";
+        //echo "<script>console.log('otd: " . $date->to_date. "' );</script>";
 
         foreach ($query1->result() as $row){ 
             
@@ -199,17 +195,41 @@ class Inserting_model extends CI_Model{
               }
             };
             $this->db->insert('academic_classroom_booking',$alloted_room_data);
-              
+            $
             $count = $count + 1;
+            $unique = 1;
+            $alert_msg = 1;
           }
-      else{
-          echo "<script>console.log('star start: ' );</script>";
+          elseif($alloted_room_data['room_name']== $date->room_name){
+            $is_name_in_form = true;
+          }
+    };
 
-      };
-    }
+        if ($unique==0 and $para=="" and $is_name_in_form == false){
+
+          foreach ($query1->result() as $row){ 
+
+            if ($alloted_room_data['dept'] == $row->dept_name){
+                $alloted_room_data['dept']= $row->dept_id;
+            }
+
+            if ($alloted_room_data['year'] == $row->year_name){
+                $alloted_room_data['year']= $row->year_id;
+            }
+          };
+
+          $this->db->insert('academic_classroom_booking',$alloted_room_data);
+          $alert_msg = 1;
+        }
+        if($para != ""){
+
+                  
+          $this->db->where('alloted_room_id', $para);
+          $this->db->delete('academic_classroom_booking');
         
+            };
       
-        
+        return $alert_msg;
 
     }
 

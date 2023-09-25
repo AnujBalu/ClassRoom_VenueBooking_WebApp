@@ -34,9 +34,12 @@ public function method1($param1="")
 		$this->load->view('Admin_1/Templates/java_script');
 		
 	}
-	public function open_table()
+	public function open_table($param1='')
 	{
+
 		$this->load->database();  
+		$data['room_profile'] = $this->db->get_where('form', array('id' => $param1))->row();
+
 	   	$this->load->model('Inserting_model');  
 	   	$data['h'] = $this->Inserting_model->select();
 		$this->load->helper('url');
@@ -47,6 +50,20 @@ public function method1($param1="")
 		$this->load->view('Admin_1/Templates/java_script');
 		
 	}
+	public function admin_allocation()
+	{
+
+		$this->load->database();  
+		$this->load->helper('url');
+
+		$this->load->view('Admin_1/Templates/style_script');
+		$this->load->view('Admin_1/Templates/navbar');
+		$this->load->view('Admin_1/Templates/side_bar');
+		$this->load->view('Admin_1/admin_allocation');
+		$this->load->view('Admin_1/Templates/java_script');
+		
+	}
+
 	public function add_room($param1='')
 	{
 		$this->load->database();  
@@ -283,7 +300,7 @@ public function method1($param1="")
 		$alloted_room_data = array(
 			'dept'     => $this->input->post('department'),
 			'year'     => $this->input->post('year'),						
-			'alloted_room_data'     => $this->input->post('room_name'),
+			'room_name'     => $this->input->post('room_name'),
 			'from_date'     => $f_date,
 			'to_date'     => $t_date,
 			'from_time'     => $f_time,

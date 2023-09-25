@@ -74,7 +74,10 @@
       }
       $(document).ready(function () {
       $('#myTable').DataTable();
-});
+      });
+      $(document).ready(function () {
+          $('#available').DataTable();
+      });
   </script>
 
 </body>

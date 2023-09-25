@@ -48,6 +48,9 @@
               <ul class="nav flex-column sub-menu">
                 <li class="nav-item"> <a class="nav-link" href="<?php echo base_url()?>Dashboard/open_table">Table</a></li>
               </ul>
+              <ul class="nav flex-column sub-menu">
+                <li class="nav-item"> <a class="nav-link" href="<?php echo base_url()?>Dashboard/admin_allocation">Admin Allocation</a></li>
+              </ul>
             </div>
           </li>
          

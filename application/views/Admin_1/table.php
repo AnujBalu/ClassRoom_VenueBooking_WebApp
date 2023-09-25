@@ -47,9 +47,7 @@
                         <td><?php echo $row->t_date;?></td>
                         
                         <td class="font-weight-medium">
-                        <a class="badge badge-success edit_btn" data-bs-toggle="modal" data-bs-target="#exampleModal" href="">View</a>
-                    
-                        
+                        <a class="badge badge-success edit_btn" data-bs-toggle="modal" data-bs-target="#exampleModal" href="<?php echo base_url()?>Dashboard/open_table/<?php echo $row->id?>">View</a>
                         </td>
                     </tr>
         <?php }  
@@ -81,12 +79,15 @@
 <!-- Button trigger modal -->
 
 
-<!-- Modal -->
+
+
+
+<!--//////////////////////////////////////////////// Modal ///////////////////////////////////////////////////-->
 <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
   <div class="modal-dialog modal-dialog-centered modal-xl">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+    <div class="modal-content bg-light">
+      <div class="modal-header ">
+        <h5 class="modal-title" id="exampleModalLabel">Room Profile</h5>
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
       <div class="modal-body">
@@ -110,11 +111,7 @@
               <h5 class="my-3">IB201</h5>
               <p class="text-muted mb-1">II-floor</p>
               <p class="text-muted mb-4">IB Block</p>
-              <div class="d-flex justify-content-center mb-2">
-                <button type="button" class="btn btn-primary">Follow</button>
-                <button type="button" class="btn btn-outline-primary ms-1">Message</button>
-              </div>
-            </div>
+        </div>
           </div>
           
         </div>
@@ -126,7 +123,7 @@
                   <p class="mb-0"> Name</p>
                 </div>
                 <div class="col-sm-9">
-                  <p class="text-muted mb-0">Sankar</p>
+                  <p class="text-muted mb-0"><?php echo $row->name;?></p>
                 </div>
               </div>
               <hr>
@@ -135,7 +132,7 @@
                   <p class="mb-0">ID</p>
                 </div>
                 <div class="col-sm-9">
-                  <p class="text-muted mb-0">CT2028</p>
+                  <p class="text-muted mb-0"><?php echo $row->person_id;?></p>
                 </div>
               </div>
               <hr>
@@ -144,7 +141,7 @@
                   <p class="mb-0">Email</p>
                 </div>
                 <div class="col-sm-9">
-                  <p class="text-muted mb-0">sankarprasath.ct21@bitsathy.ac.in</p>
+                  <p class="text-muted mb-0"><?php echo $row->email;?></p>
                 </div>
               </div>
               <hr>
@@ -153,7 +150,7 @@
                   <p class="mb-0">capacity</p>
                 </div>
                 <div class="col-sm-9">
-                  <p class="text-muted mb-0">60</p>
+                  <p class="text-muted mb-0"><?php echo $row->capacity;?></p>
                 </div>
               </div>
               <hr>
@@ -162,7 +159,7 @@
                   <p class="mb-0">room type</p>
                 </div>
                 <div class="col-sm-9">
-                  <p class="text-muted mb-0">Class room</p>
+                  <p class="text-muted mb-0"><?php echo $row->room_type;?></p>
                 </div>
               </div>
               <hr>
@@ -171,7 +168,7 @@
                   <p class="mb-0">purpose</p>
                 </div>
                 <div class="col-sm-9">
-                  <p class="text-muted mb-0">Acadamic</p>
+                  <p class="text-muted mb-0"><?php echo $row->proposal;?></p>
                 </div>
               </div>
               <hr>
@@ -180,7 +177,7 @@
                   <p class="mb-0">from date</p>
                 </div>
                 <div class="col-sm-9">
-                  <p class="text-muted mb-0">27/09/2022</p>
+                  <p class="text-muted mb-0"><?php echo $row->f_date;?></p>
                 </div>
               </div>
               <hr>
@@ -189,7 +186,7 @@
                   <p class="mb-0">to date</p>
                 </div>
                 <div class="col-sm-9">
-                  <p class="text-muted mb-0">28/09/2022</p>
+                  <p class="text-muted mb-0"><?php echo $row->t_date;?></p>
                 </div>
               </div>
               <hr>
@@ -198,7 +195,7 @@
                   <p class="mb-0">From time</p>
                 </div>
                 <div class="col-sm-9">
-                  <p class="text-muted mb-0">8:45am</p>
+                  <p class="text-muted mb-0"><?php echo $row->f_time;?></p>
                 </div>
               </div>
               <hr>
@@ -207,7 +204,7 @@
                   <p class="mb-0">To time</p>
                 </div>
                 <div class="col-sm-9">
-                  <p class="text-muted mb-0">8:45am</p>
+                  <p class="text-muted mb-0"><?php echo $row->t_time;?></p>
                 </div>
               </div>
               <hr>
@@ -216,7 +213,7 @@
                   <p class="mb-0">Speakers</p>
                 </div>
                 <div class="col-sm-9">
-                  <p class="text-muted mb-0">2</p>
+                  <p class="text-muted mb-0"><?php echo $row->speaker;?></p>
                 </div>
               </div>
               <hr>
@@ -225,7 +222,7 @@
                   <p class="mb-0">System</p>
                 </div>
                 <div class="col-sm-9">
-                  <p class="text-muted mb-0">60</p>
+                  <p class="text-muted mb-0"><?php echo $row->systems;?></p>
                 </div>
               </div>
               <hr>
@@ -234,7 +231,7 @@
                   <p class="mb-0">WIFI</p>
                 </div>
                 <div class="col-sm-9">
-                  <p class="text-muted mb-0">Yes</p>
+                  <p class="text-muted mb-0"><?php echo $row->wifi;?></p>
                 </div>
               </div>
               <hr>
@@ -243,7 +240,7 @@
                   <p class="mb-0">Projector</p>
                 </div>
                 <div class="col-sm-9">
-                  <p class="text-muted mb-0">2</p>
+                  <p class="text-muted mb-0"><?php echo $row->projector;?></p>
                 </div>
               </div>
               <hr>
@@ -262,8 +259,13 @@
 
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-        <button type="button" class="btn btn-primary">Save changes</button>
+
       </div>
     </div>
   </div>
 </div>
+
+<!--//////////////////////////////////////////////// Modal ///////////////////////////////////////////////////-->
+
+
+
