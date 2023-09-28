@@ -49,13 +49,12 @@
                   </div>
                 </div>
       <!-- main-panel ends -->
-            </div>
-    <!-- page-body-wrapper ends -->
-  </div>
-
-  </form>
-                </div>
               </div>
-            </div>            
-          </div>
+    <!-- page-body-wrapper ends -->
+            </div>
+          </form>
         </div>
+      </div>
+    </div>            
+  </div>
+</div>

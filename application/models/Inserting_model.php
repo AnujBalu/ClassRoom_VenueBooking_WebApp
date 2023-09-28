@@ -2,6 +2,8 @@
 <?php
 class Inserting_model extends CI_Model{
     function form_info($data){
+
+      
         $this->load->database();
         $this->db->insert('form',$data);
         
@@ -317,5 +319,44 @@ class Inserting_model extends CI_Model{
       
 
     }
+
+
+
+
+    ////////////////////////////////under work /////////////////////////////////
+    public function get_available_admin_allocation(){
+      $this->load->database();
+      
+      $fd = '2022-09-20';
+      $td = '2022-09-29';
+      $avail_room_name='EC111';
+      echo "<script>console.log('star: " . $df. "' );</script>";
+
+      $this->db->select('*');
+      $this->db->from('academic_classroom_booking');
+      $this->db->where('"'. $fd. '"BETWEEN from_date AND to_date');
+      $this->db->or_where('"'. $td. '"BETWEEN from_date AND to_date');
+      $this->db->where('room_name',$avail_room_name);
+
+     
+      $query1 = $this->db->get(); 
+
+      
+      $is_date_available = 0;
+      for ($x = 0; $x < 1; $x++) {
+     
+      foreach ($query1->result() as $row){  
+        echo "<script>console.log('swtar: " . $row->room_name. "' );</script>";
+        echo "<script>console.log('star: " . $row->from_date. "' );</script>";
+
+        $is_date_available = 1;
+        };
+        if($is_date_available == 0){
+          echo "<script>console.log('staedwdcr - available' );</script>";
+
+        };
+      };
+  }
+  //////////////////////////////////////////////////////////////////////
 }
 ?>

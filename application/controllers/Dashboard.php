@@ -55,11 +55,14 @@ public function method1($param1="")
 
 		$this->load->database();  
 		$this->load->helper('url');
+		$this->load->model('Inserting_model'); 
+		$data['allotment']= $this->db->get('form');
+		$data['available_venue'] = $this->Inserting_model->get_available_admin_allocation();
 
 		$this->load->view('Admin_1/Templates/style_script');
 		$this->load->view('Admin_1/Templates/navbar');
 		$this->load->view('Admin_1/Templates/side_bar');
-		$this->load->view('Admin_1/admin_allocation');
+		$this->load->view('Admin_1/admin_allocation',$data);
 		$this->load->view('Admin_1/Templates/java_script');
 		
 	}

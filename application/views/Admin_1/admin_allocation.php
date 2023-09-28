@@ -29,7 +29,7 @@ option {
               <div class="card">
                 <div class="card-body">
                   <h4 class="card-title p-3 mb-2 bg-primary text-white rounded" >Allocate the Room</h4>
-                  <form class="form-sample" method="post" action="">
+               
                     <p class="card-description">
       
                     </p>
@@ -38,7 +38,7 @@ option {
                         <div class="form-group row">
                           <label  class="col-sm-3 form-label">Room Type</label>                          
                           <div class="col-sm-9">
-                            <select id="datalistOptions"   name="room_type" id="room_type" required >
+                            <select id="datalistOptions"   name="room_type" id="room_type"  >
                                  <option value="" disabled selected hidden>Room Type</option>
                                  <option>Seminar Hall</option>
                                  <option>Conference Hall</option>
@@ -51,163 +51,109 @@ option {
                       </div>
                       <div class="col-md-6">
                         <div class="form-group row">
-                          <label for="event_id" class="col-sm-3 form-label">Availability</label>
+                          <label for="availability"  class="col-sm-3 form-label">Availability</label>
                           <div class="col-sm-9">
                               
-                          <select id="datalistOptions"   name="room_type" id="room_type" required >
+                          <select name="availability" id="availability" required >
                                  <option value="" disabled selected hidden>Availability</option>
-                                 <option>Availabile</option>
-                                 <option>Alloted</option>
+                                 <option >Availabile</option>
+                                 <option>Allotement</option>
                           </select>
                           </div>
                         </div>
                       </div>
                     </div>
                     
-                      <button type="submit" class="btn btn-primary mr-2">Search</button>
+                      <button onclick="available_or_not()"  class="btn btn-primary mr-2">Search</button>
                       </div>
-                  </form>
+                  
                   
         
                   </div>
                 </div>
+
+                
                 <div class="col-lg-12 grid-margin stretch-card">
               <div class="card">
-                <div class="card-body">
-                  <h4 class="card-title">Striped Table</h4>
 
-                  <div class="table-responsive">
-                    <table class="table table-striped" id="available">
+              <!--***************************************************************-->
+                <div class="card-body" >
+                  <h4 class="card-title">Striped Table</h4>
+    <!--***************************************************************-->
+
+                  <div class="table-responsive"  id="alloted">
+                    <table class="table table-striped" id="alloted_search">
+                    <thead>
+                      
+                      <tr>
+                            <th>Name</th>
+                            <th>Id</th>
+                            <th>Capacity</th>
+                            <th>Room Type</th>
+                            <th>Proposal</th>
+                            <th>From Date</th>
+                            <th>To Date</th>
+                            <th>View</th>
+                  
+                          </tr>  
+                           
+                        </thead>
+                        <tbody>
+                           <?php  
+          foreach ($allotment->result() as $row)  
+          {  
+              ?>
+  
+              <tr>
+                          <td><?php echo $row->name;?></td>
+                          <td><?php echo $row->person_id;?></td>
+                          <td><?php echo $row->capacity;?></td>
+                          <td><?php echo $row->room_type;?></td>
+                          <td><?php echo $row->proposal;?></td>
+                          <td><?php echo $row->f_date;?></td>
+                          <td><?php echo $row->t_date;?></td>
+                          
+                          <td class="font-weight-medium">
+                          <a class="badge badge-success edit_btn" data-bs-toggle="modal" data-bs-target="#exampleModal" href="<?php echo base_url()?>Dashboard/open_table/<?php echo $row->id?>">Allocate</a>
+                          </td>
+                      </tr>
+          <?php }  
+      ?>
+                        
+                        
+                      
+                        </tbody>
+  
+                    </table>
+</div>
+
+     <!--***************************************************************-->
+     <div class="table-responsive" id="available_room_list" style="display:none;">
+                    <table class="table table-striped" id="available_search" >
                       <thead>
                         <tr>
-                          <th>
-                            User
-                          </th>
-                          <th>
-                            First name
-                          </th>
-                        
-                          <th>
-                            Amount
-                          </th>
-                          <th>
-                            Deadline
-                          </th>
-                        </tr>
+                          <th>Room Name</th>
+                          <th>Block Name</th>
+                          <th>Floor</th>
+                          <th>Seat Capacity</th>
+                        </tr> 
                       </thead>
                       <tbody>
-                        <tr>
-                          <td class="py-1">
-                            <img src="../../images/faces/face1.jpg" alt="image"/>
-                          </td>
-                          <td>
-                            Herman Beck
-                          </td>
-
-                          <td>
-                            $ 77.99
-                          </td>
-                          <td>
-                            May 15, 2015
-                          </td>
-                        </tr>
-                        <tr>
-                          <td class="py-1">
-                            <img src="../../images/faces/face2.jpg" alt="image"/>
-                          </td>
-                          <td>
-                            Messsy Adam
-                          </td>
-
-                          <td>
-                            $245.30
-                          </td>
-                          <td>
-                            July 1, 2015
-                          </td>
-                        </tr>
-                        <tr>
-                          <td class="py-1">
-                            <img src="../../images/faces/face3.jpg" alt="image"/>
-                          </td>
-                          <td>
-                            John Richards
-                          </td>
-
-                          <td>
-                            $138.00
-                          </td>
-                          <td>
-                            Apr 12, 2015
-                          </td>
-                        </tr>
-                        <tr>
-                          <td class="py-1">
-                            <img src="../../images/faces/face4.jpg" alt="image"/>
-                          </td>
-                          <td>
-                            Peter Meggik
-                          </td>
-
-                          <td>
-                            $ 77.99
-                          </td>
-                          <td>
-                            May 15, 2015
-                          </td>
-                        </tr>
-                        <tr>
-                          <td class="py-1">
-                            <img src="../../images/faces/face5.jpg" alt="image"/>
-                          </td>
-                          <td>
-                            Edward
-                          </td>
-
-                          <td>
-                            $ 160.25
-                          </td>
-                          <td>
-                            May 03, 2015
-                          </td>
-                        </tr>
-                        <tr>
-                          <td class="py-1">
-                            <img src="../../images/faces/face6.jpg" alt="image"/>
-                          </td>
-                          <td>
-                            John Doe
-                          </td>
-
-                          <td>
-                            $ 123.21
-                          </td>
-                          <td>
-                            April 05, 2015
-                          </td>
-                        </tr>
-                        <tr>
-                          <td class="py-1">
-                            <img src="../../images/faces/face7.jpg" alt="image"/>
-                          </td>
-                          <td>
-                            Henry Tom
-                          </td>
-
-                          <td>
-                            $ 150.00
-                          </td>
-                          <td>
-                            June 16, 2015
-                          </td>
-                        </tr>
+                    
                       </tbody>
                     </table>
+
+    <!--***************************************************************-->
+
+
                   </div>
                 </div>
               </div>
             </div>
               </div>
+
+    <!--***************************************************************-->
+
               
           </div>
       </div>
