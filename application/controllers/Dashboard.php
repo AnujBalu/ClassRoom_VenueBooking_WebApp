@@ -3,16 +3,25 @@
 class Dashboard extends CI_Controller {
 	public function __construct(){
 		parent::__construct();
+		$this->load->library('session');
+
 		
 	}
 	public function index(){
 		$this->load->helper('url');
-		$this->load->view('users\request_form');
+		$this->load->database();
+		$this->load->model('Inserting_model');
+		$data['room_type'] = $this->Inserting_model->room_type();
+		$data['capacity'] = $this->Inserting_model->seating_capacity();
+
+		$this->load->view('users\request_form',$data);
 
 	}
 	public function dashboard($each_rm_name='')
 	{	
 		$this->load->database();
+		if($this->session->userdata('user')){
+
 		$current_date = @date('Y-m-d');
 		$data['each_rm']=$each_rm_name;
 		echo "<script>console.log('select_room_type	: " . $each_rm_name. "' );</script>";		
@@ -61,6 +70,11 @@ class Dashboard extends CI_Controller {
 		$this->load->view('Admin_1/Templates/side_bar');
 		$this->load->view('Admin_1/dashboard',$data);
 		$this->load->view('Admin_1/Templates/java_script');
+		}
+		else{
+			redirect('Login');
+
+		}
 		
 	}
 
@@ -281,6 +295,8 @@ public function method1($param1="")
 		$this->load->helper('url');
 		$date = date('Y-m-d');
 		$name = $this->input->post('user');
+		echo "<script>console.log('Debug Objects:' );</script>";
+
 		if ($name='faculty'){
 			$person_name = $this->input->post('faculty_name');
 			$person_id = $this->input->post('faculty_id');
@@ -320,6 +336,8 @@ public function method1($param1="")
 		$t_date = $t_dateTime->format('Y-m-d');
 		$t_time = $t_dateTime->format('H:i:s');
 		$hi = $this->input->post('Register');
+		echo "<script>console.log('Debug Objects gg:' );</script>";
+
         $data = array(  
                         'name'     => $person_name,
 						'person_id'     => $person_id,
@@ -338,13 +356,95 @@ public function method1($param1="")
 						'approval'=> 'pending',
                         );   
         
-		//echo "<script>console.log('Debug Objects: " . $data['f_date']. "' );</script>";
+		echo "<script>console.log('Debug Objects: " . $data['f_date']. "' );</script>";
 				
 		$this->load->model("Inserting_model");
 		$this->Inserting_model->form_info($data);
-		
+		echo "<script>console.log('Debu222222222222222222g Objects:' );</script>";
+
         redirect('Dashboard/open_form');
 	}
+
+	//////////////////////////////////////////////////////////////////
+	public function users_pg_request(){
+        //this array is used to get fetch data from the view page.  
+		$this->load->helper('url');
+		$date = date('Y-m-d');
+	
+		$events = $this->input->post('proposal');
+		if ($events =="Others"){
+			$events = $this->input->post('others_option');
+		};
+		
+
+		$systems = $this->input->post('systems');
+		if ($systems='YES'){
+			$systems = $this->input->post('no_of_system');
+		}
+		else{
+			$systems ="No";
+		};
+		$speaker = $this->input->post('speaker');
+		if ($speaker=='YES'){
+			$speaker = $this->input->post('no_of_speaker');
+		}
+		else{
+			$speaker = "NO";
+		};
+		$from_date_time = $this->input->post('from_date_time');
+		$f_dateTime = new DateTime($from_date_time);
+		$f_date = $f_dateTime->format('Y-m-d');
+		$f_time = $f_dateTime->format('H:i:s');
+		//$xy = $this->input->post('times');
+		$to_date_time = $this->input->post('to_date_time');
+		$t_dateTime = new DateTime($to_date_time);
+		$t_date = $t_dateTime->format('Y-m-d');
+		$t_time = $t_dateTime->format('H:i:s');
+
+        $data = array(  
+                        'name'     => $this->input->post('faculty_name'),
+						'person_id'     => $this->input->post('faculty_id'),
+						'email'     => $this->input->post('email'),						
+						'capacity'     => $this->input->post('capacity'),
+						'room_type'     => $this->input->post('room_type'),
+						'proposal'     => $this->input->post('proposal'),
+						'f_date'     => $f_date,
+						't_date'     => $t_date,
+						'f_time'     => $f_time,
+						't_time'     => $t_time,
+						'projector'     => $this->input->post('projector'),
+						'wifi'     => $this->input->post('wifi'),
+						'systems'     => $systems,
+						'speaker'     => $speaker,
+						'approval'=> 'pending',
+                        );   
+        
+		echo "<script>console.log('Debug Objects: " . $data['name']. "' );</script>";
+		echo "<script>console.log('Debug Objects: " . $data['person_id']. "' );</script>";
+		echo "<script>console.log('Debug Objects: " . $data['email']. "' );</script>";
+		echo "<script>console.log('Debug Objects: " . $data['capacity']. "' );</script>";
+		echo "<script>console.log('Debug Objects: " . $data['room_type']. "' );</script>";
+		echo "<script>console.log('Debug Objects: " . $data['proposal']. "' );</script>";
+		echo "<script>console.log('Debug Objects: " . $data['f_date']. "' );</script>";
+		echo "<script>console.log('Debug Objects: " . $data['t_date']. "' );</script>";
+		echo "<script>console.log('Debug Objects: " . $data['f_time']. "' );</script>";
+		echo "<script>console.log('Debug Objects: " . $data['t_time']. "' );</script>";
+		echo "<script>console.log('Debug Objects: " . $data['projector']. "' );</script>";
+		echo "<script>console.log('Debug Objects: " . $data['wifi']. "' );</script>";
+		echo "<script>console.log('Debug Objects: " . $data['systems']. "' );</script>";
+		echo "<script>console.log('Debug Objects: " . $data['speaker']. "' );</script>";
+		echo "<script>console.log('Debug Objects: " . $data['approval']. "' );</script>";
+		
+				
+		$this->load->model("Inserting_model");
+		$this->Inserting_model->form_info($data);
+		echo "<script>console.log('Debu222222222222222222g Objects:' );</script>";
+
+        redirect('Dashboard/index');
+	}
+	//////////////////////////////////////////////////////////////////
+
+
 	public function deletes($para=""){
 		$this->load->helper('url');
 		$this->load->database();

@@ -12,15 +12,15 @@
               </div>
               <center><h3>Venue Booking</h3></center>
               <center><h6 class="font-weight-light">Sign in to continue.</h6></center>
-              <form class="pt-3">
+              <form class="pt-3" method="post" action="<?php echo base_url()?>Login/login">
                 <div class="form-group">
-                  <input type="email" class="form-control form-control-lg" id="exampleInputEmail1" placeholder="Username">
+                  <input type="email" name="email" class="form-control form-control-lg" id="exampleInputEmail1" placeholder="Username">
                 </div>
                 <div class="form-group">
-                  <input type="password" class="form-control form-control-lg" id="exampleInputPassword1" placeholder="Password">
+                  <input type="password" name="password" class="form-control form-control-lg" id="exampleInputPassword1" placeholder="Password">
                 </div>
                 <div class="mt-3">
-                  <a class="btn btn-block btn-primary btn-lg font-weight-medium auth-form-btn" href="<?php echo base_url()?>Dashboard">SIGN IN</a>
+                  <button class="btn btn-block btn-primary btn-lg font-weight-medium auth-form-btn">SIGN IN</button>
                 </div>
                 <div class="my-2 d-flex justify-content-between align-items-center">
                   <div class="form-check">
@@ -40,6 +40,15 @@
               </form>
             </div>
           </div>
+          <?php
+				if($this->session->flashdata('error')){
+					?>
+					<div class="alert alert-danger text-center" style="margin-top:20px;">
+						<?php echo $this->session->flashdata('error'); ?>
+					</div>
+					<?php
+				}
+			?>
         </div>
       </div>
       <!-- content-wrapper ends -->

@@ -26,7 +26,7 @@
   <link href="<?php echo base_url();?>/vendors/css/vendor.bundle.base.css" rel="stylesheet">
 
   <link href="<?php echo base_url();?>/js/select.dataTables.min.css" rel="stylesheet">
-  <link href="<?php echo base_url();?>/css/vertical-layout-light/style.css" rel="stylesheet">
+  <link href="<?php echo base_url();?>/css/style.css" rel="stylesheet">
   
 
   <!-- endinject -->

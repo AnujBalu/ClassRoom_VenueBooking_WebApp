@@ -1,11 +1,24 @@
 
 <?php
 class Inserting_model extends CI_Model{
+
+  public function login($email, $password){
+    $this->load->database();
+    echo "<script>console.log('Debug Objects: " . $password. "' );</script>";
+
+    $query = $this->db->get_where('login_account', array('email'=>$email, 'password'=>$password));
+    return $query->row_array();
+  }
+
     function form_info($data){
 
-      
+
         $this->load->database();
+        echo "<script>console.log('Debu222222222222222222g Objects:' );</script>";
+
         $this->db->insert('form',$data);
+        echo "<script>console.log('Debu222222222222222222g Objects:' );</script>";
+
         
     }
     public function select()  

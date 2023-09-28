@@ -35,6 +35,7 @@ function select_projector(){
         }
         else{
           no_of_system.style.display="none"
+          
         }
        }
        </script>
@@ -87,7 +88,7 @@ function select_projector(){
       .banner {
       position: relative;
       height: 300px;
-      background-image: url("s.png");  
+      background-image: url("<?php echo base_url()?>images/view_pg_img/request_form.png");  
       background-size: cover;
       display: flex;
       justify-content: center;
@@ -449,14 +450,12 @@ body {
   <header>
       <nav class="navbar">
         
-      <img class="logo-img" src="<?php echo base_url()?>images/logo/login_logo.jpeg" ALT="align box">
+      <img class="logo-img" src="<?php echo base_url()?>images/logo/login_logo.jpeg" ALT="BIT">
 
         
         <ul>
-          <li><a href="#">Projects</a></li>
-          <li><a href="#">Services</a></li>
-          <li><a href="#">Staff</a></li>
-          <li><a href="#">About</a></li>
+          <li><a href="#">Schedule Request</a></li>
+          <li><a href="#">View Status</a></li>
         </ul>
         
         <button class=login-btn><a href="<?php echo base_url()?>Login">Login</a></button>
@@ -464,65 +463,73 @@ body {
     </header>
 
     <div class="testbox">
-      <form>
+      <form method="post" action="<?php echo base_url(); ?>Dashboard/users_pg_request">
         <div class="banner">
         </div>
         <br/>
         <fieldset>
   <div class="colums">
           <div class="item">
-            <label for="fname"> Faculty Name <span>*</span></label>
-            <input id="fname" type="text" name="fname" />
+            <label for="faculty_name"> Faculty Name <span>*</span></label>
+            <input id="faculty_name" type="text" name="faculty_name" />
           </div>
           <div class="item">
-            <label for="lname"> Faculty ID<span>*</span></label>
-            <input id="lname" type="text" name="lname" />
+            <label for="faculty_id"> Faculty ID<span>*</span></label>
+            <input id="faculty_id" type="text" name="faculty_id" />
           </div>
           <div class="item">
-            <label for="address1"> Email <span>*</span></label>
-            <input id="address1" type="text"   name="address1" />
+            <label for="email"> Email <span>*</span></label>
+            <input id="email" type="text"   name="email" />
           </div>
           <div class="item">
-            <label for="address2">Capacity<span>*</span></label>
-            <input id="address2" type="text"   list="listid" />
-            <datalist id='listid'>
-              <option selected value="" disabled selected></option>
-            <option  >72</option>
-            <option >42</option>
-            <option >180</option>
-            <option>1800</option>
+            <label for="capacity">Capacity<span>*</span></label>
+            <input id="capacity" type="number" name="capacity" list="capacity_list" />
+            <datalist id='capacity_list'>
+            <option selected hidden></option>
+              <?php  
+                  foreach ($capacity->result() as $row)  
+                  {  
+                      ?>
+                <option><?php echo $row->capacity ?></option>
+              <?php } ?>
            </datalist>
           </div>
           <div class="item">
-            <label for="city">Room type <span>*</span></label>
-            <input id="city" type="text"   list="list" />
-            <datalist id='list'>
-              <option selected value="" disabled selected></option>
-            <option  >seminar hall</option>
-            <option >Auditorium</option>
-            <option >classRoom</option>
-            <option>Discussion room</option>
+            <label for="room_type">Room type <span>*</span></label>
+            <input id="room_type" type="text" name="room_type" list="room_type_list" />
+            <datalist id='room_type_list'>
+            <option selected hidden></option>
+            <?php  
+                foreach ($room_type->result() as $row)  
+                {  
+                    ?>
+              <option><?php echo $row->room_type_name ?></option>
+            <?php } ?>
            </datalist>
           </div>
           <div class="item">
-            <label for="state">Proposal<span>*</span></label>
-            <input id="state" type="text"   list="list_1" />
-            <datalist id='list_1'>
-              <option selected value="" disabled selected></option>
-            <option  >Acadamics</option>
-            <option >Event</option>
-            <option >Mentor meeting</option>
-            <option>club</option>
+            <label for="proposal">Proposal<span>*</span></label>
+            <input id="proposal" type="text" name="proposal" list="proposal_list" />
+            <datalist id='proposal_list'>
+            <option>Academics</option>
+            <option>Interview</option>
+            <option>Mentor Meeting</option>
+            <option>Club Event</option>
+            <option>Seminar</option>
+            <option>Workshop</option> 
+            <option>School Training</option>
+            <option>Conference</option>
+            <option id="others">Others</option>
            </datalist>
           </div>
         </div>
           <div class="item">
             <label for="date">From Date and time <span>*</span></label>
-            <input type="datetime-local" id="daytime"name="daytime" />
+            <input type="datetime-local" id="daytime"name="from_date_time" />
           </div>
            <div class="item">
             <label for="date">To Date and time <span>*</span></label>
-            <input type="datetime-local"id="daytime" name="daytime" />
+            <input type="datetime-local"id="daytime" name="to_date_time" />
            </div>
   
 
@@ -532,23 +539,19 @@ body {
                 <p>Projector</p>
                 <div class="question-answer">
                   <div class="radio_9">
-                  <input type="radio" value="none" id="radio_9" name="projector" onclick="select_projector()"/>
-                  <label for="radio_9" class="radio"><span>Yes</span></label>
+                  <input type="radio" id="radio_9" value="YES" name="projector"/>
+                  <label for="radio_9" class="radio"><span>YES</span></label>
                   
                 </div>
                 <div class="radio_10">
-                  <input type="radio" value="none" id="radio_10" name="projector" onclick="select_projector()" />
-                  <label for="radio_10" class="radio"><span>No</span></label>
+                  <input type="radio" value="NO" id="radio_10" name="projector"/>
+                  <label for="radio_10" class="radio"><span>NO</span></label>
                 </div>
               </div>
             </div>
         
               
-              <div class="no_of_projector" id="box" style="display:none;">
-
-                <label for="fname"> No of Projector <span></span></label>
-                <input  type="text" name="fname" />
-              </div>
+              
             </div>
 
               <div class="question" style="border:1px solid transparent ;">
@@ -557,12 +560,12 @@ body {
                   <p>Speaker</p>
                   <div class="question-answer">
                     <div class="radio_13">
-                    <input type="radio" value="none" id="radio_13" name="speaker" onclick="select_speaker()"/>
+                    <input type="radio" value="YES" id="radio_13" name="speaker" onclick="select_speaker()"/>
                     <label for="radio_13" class="radio"><span>Yes</span></label>
                     
                   </div>
                   <div class="radio_14">
-                    <input type="radio" value="none" id="radio_14" name="speaker" onclick="select_speaker()" />
+                    <input type="radio" value="NO" id="radio_14" name="speaker" onclick="select_speaker()" />
                     <label for="radio_14" class="radio"><span>No</span></label>
                   </div>
                   
@@ -573,7 +576,7 @@ body {
              
              <div class="no_of_speaker" id="box_1" style="display:none;">
                 <label for="fname"> No of Speakers </label>
-                <input  type="text" name="fname" />
+                <input  type="number" name="no_of_speaker" />
               </div>
             </div>
                   
@@ -585,11 +588,11 @@ body {
                         <p>System</p>
                         <div class="question-answer">
                           <div class="radio_15">
-                          <input type="radio" value="none" id="radio_15" name="system" onclick="select_system()"/>
+                          <input type="radio" value="YES" id="radio_15" name="system" onclick="select_system()"/>
                           <label for="radio_15" class="radio"><span>Yes</span></label>
                         </div>
                         <div class="radio_16">
-                          <input type="radio" value="none" id="radio_16" name="system" onclick="select_system()"/>
+                          <input type="radio" value="NO" id="radio_16" name="system" onclick="select_system()"/>
                           <label for="radio_16" class="radio"><span>No</span></label>
                         </div>
                       </div>
@@ -597,7 +600,7 @@ body {
          
                     <div class="no_of_system" id="box_2" style="display:none;">
                       <label for="fname"> No of System </label>
-                      <input  type="text" name="fname" />
+                      <input  type="number" name="no_of_system" />
                     </div>
                 </div>
 
@@ -607,11 +610,11 @@ body {
                         <p>WIFI</p>
                         <div class="question-answer">
                           <div class="radio_17">
-                          <input type="radio" value="none" id="radio_17" name="wifi" />
+                          <input type="radio" value="YES" id="radio_17" name="wifi" />
                           <label for="radio_17" class="radio"><span>Yes</span></label>
                         </div>
                         <div class="radio_18">
-                          <input type="radio" value="none" id="radio_18" name="wifi" />
+                          <input type="radio" value="NO" id="radio_18" name="wifi" />
                           <label for="radio_18" class="radio"><span>No</span></label>
                         </div>
                       </div>

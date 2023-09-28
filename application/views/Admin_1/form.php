@@ -65,7 +65,7 @@
                           <div class="form-group row">
                             <label class="col-sm-3 col-form-label">Student Name</label>
                             <div class="col-sm-9">
-                              <input type="text" name="Student_name" class="form-control" placeholder="NAME" required/>
+                              <input type="text" name="Student_name" class="form-control" placeholder="NAME" />
                             </div>
                           </div>
                         </div>
@@ -74,7 +74,7 @@
                           <div class="form-group row">
                             <label class="col-sm-3 col-form-label">Student Id</label>
                             <div class="col-sm-9">
-                              <input type="text" name="Student_id" class="form-control" placeholder="ID" required/>
+                              <input type="text" name="Student_id" class="form-control" placeholder="ID" />
                             </div>
                           </div>
                         </div>
@@ -156,7 +156,7 @@
                         <div class="form-group row"  >
                           <label class="col-sm-3 col-form-label" >Event Name</label>
                           <div class="col-sm-9" >
-                            <input type="text" name="others_option" class="form-control bod" placeholder="Event Name" required/>
+                            <input type="text" name="others_option" class="form-control bod" placeholder="Event Name" />
                           </div>
                         </div>
                     </div>
