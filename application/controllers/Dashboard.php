@@ -25,14 +25,17 @@ public function method1($param1="")
 	
 	public function open_form()
 	{
-		
+		$this->load->database();  
+	   	$this->load->model('Inserting_model');
+		$data['room_type'] = $this->Inserting_model->room_type();
+
 		$this->load->helper('url');
 		$this->load->view('Admin_1/Templates/style_script');
 		$this->load->view('Admin_1/Templates/navbar');
 		$this->load->view('Admin_1/Templates/side_bar');
-		$this->load->view('Admin_1/form');
+		$this->load->view('Admin_1/form',$data);
 		$this->load->view('Admin_1/Templates/java_script');
-		
+				
 	}
 	public function open_table($param1='')
 	{
@@ -56,8 +59,40 @@ public function method1($param1="")
 		$this->load->database();  
 		$this->load->helper('url');
 		$this->load->model('Inserting_model'); 
-		$data['allotment']= $this->db->get('form');
+		$data['room_type'] = $this->Inserting_model->room_type();
+
+		$select_room_type = $this->input->post('select_room_type');
+		$checking_availability = $this->input->post('availability');
+
+		if($select_room_type == ''){
+			$select_room_type = 'All';
+		}
+		if($checking_availability == ''){
+			$checking_availability = 'Allotement';
+		}
+		echo "<script>console.log('select_room_type	: " . $select_room_type. "' );</script>";		
+
 		$data['available_venue'] = $this->Inserting_model->get_available_admin_allocation();
+		echo "<script>console.log('checking_availability: " . $checking_availability. "' );</script>";	
+		$data['rm_availability'] = $checking_availability;
+		$data['select_rm_type'] = $select_room_type;
+
+		
+	
+		if ($select_room_type == '' or $select_room_type == 'All'){
+			$this->db->select('*');
+			$this->db->from('form');
+			$this->db->where('approval != "approved"');
+			$data['allotment']= $this->db->get();	
+		}
+		elseif ($select_room_type != '' or $select_room_type != 'All'){
+			$this->db->select('*');
+			$this->db->from('form');
+			$this->db->where('approval != "approved" AND room_type="'. $select_room_type. '"');
+			$data['allotment']= $this->db->get();	
+		}
+//and ($checking_availability == 'Allotement' or $checking_availability=='')
+
 
 		$this->load->view('Admin_1/Templates/style_script');
 		$this->load->view('Admin_1/Templates/navbar');
@@ -65,6 +100,25 @@ public function method1($param1="")
 		$this->load->view('Admin_1/admin_allocation',$data);
 		$this->load->view('Admin_1/Templates/java_script');
 		
+		
+	}
+	public function faculty_request_allocate_form($para=''){
+		$this->load->database();  
+		$this->load->helper('url');
+		$this->load->model('Inserting_model'); 
+		$data['room_type'] = $this->Inserting_model->room_type();
+		$data['seating_capacity'] = $this->Inserting_model->seating_capacity();
+
+		$data['allocate_detail'] = $this->db->get_where('form', array('id' => $para))->row();
+		
+		$data['avail_room_name'] = $this->Inserting_model->avail_request_room_name($para);
+		//echo "<script>console.log('snfkjbjkdjkdtar: " . $para. "' );</script>";
+
+		$this->load->view('Admin_1/Templates/style_script');
+		$this->load->view('Admin_1/Templates/navbar');
+		$this->load->view('Admin_1/Templates/side_bar');
+		$this->load->view('Admin_1/allocate_faculty_request',$data);
+		$this->load->view('Admin_1/Templates/java_script');
 	}
 
 	public function add_room($param1='')
@@ -221,9 +275,10 @@ public function method1($param1="")
 						'wifi'     => $this->input->post('wifi'),
 						'systems'     => $systems,
 						'speaker'     => $speaker,
+						'approval'=> 'pending',
                         );   
         
-		echo "<script>console.log('Debug Objects: " . $data['f_date']. "' );</script>";
+		//echo "<script>console.log('Debug Objects: " . $data['f_date']. "' );</script>";
 				
 		$this->load->model("Inserting_model");
 		$this->Inserting_model->form_info($data);
@@ -319,5 +374,35 @@ public function method1($param1="")
 		
 	}
 	
+	public function allocate_faculty_request($para=''){
+
+		
+		$this->load->helper('url');
+		$this->load->model('Inserting_model'); 
+		$allocates = $this->input->post('allocate');
+		$edit = $this->input->post('edit');
+
+		if ($allocates == 'Allocate'){
+		$this->Inserting_model->allocate_faculty_request($para);
+		}
+		redirect('Dashboard/admin_allocation');
+
+	}
+
+	public function select_search(){
+		
+		$select_room_type = $this->input->post('availability');
+		echo "<script>console.log('snfkjbjkdjkdtar: " . $select_room_type. "' );</script>";
+	}
+
+	public function edit_faculty_req($id=''){
+		$this->load->database();
+		$this->load->model('Inserting_model'); 
+		$this->load->helper('url');
+		$this->Inserting_model->edit_faculty_request($id);
+
+		redirect('Dashboard/faculty_request_allocate_form/'.$id.'');
+
+	}
 
 }

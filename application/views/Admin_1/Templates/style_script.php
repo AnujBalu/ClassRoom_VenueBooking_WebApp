@@ -30,5 +30,5 @@
   
 
   <!-- endinject -->
-  <link rel="shortcut icon" href="images/logo/title.png" />
+  <link rel="shortcut icon" href="<?php echo base_url()?>images/logo/title.png" />
 </head>

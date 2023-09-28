@@ -26,6 +26,7 @@
                           <th>Proposal</th>
                           <th>From Date</th>
                           <th>To Date</th>
+                          <th>Approval</th>
                           <th>View</th>
                 
                         </tr>  
@@ -45,7 +46,7 @@
                         <td><?php echo $row->proposal;?></td>
                         <td><?php echo $row->f_date;?></td>
                         <td><?php echo $row->t_date;?></td>
-                        
+                        <td><?php echo $row->approval;?></td>
                         <td class="font-weight-medium">
                         <a class="badge badge-success edit_btn" data-bs-toggle="modal" data-bs-target="#exampleModal" href="<?php echo base_url()?>Dashboard/open_table/<?php echo $row->id?>">View</a>
                         </td>

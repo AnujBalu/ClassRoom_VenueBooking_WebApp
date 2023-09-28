@@ -127,7 +127,6 @@
                           <th>To Date</th>
                           <th>From Time</th>
                           <th>To Time</th>
-                          <th>Approvel</th>
                         </tr>  
                       </thead>
                       <tbody>
@@ -147,9 +146,7 @@
                         <td><?php echo $row->from_time;?></td>
                         <td><?php echo $row->to_time;?></td>
                         <td id="id" style="display:none;"><?php echo $row->alloted_room_id;?></td>
-                        <td> --- </td>
-                        <td style="display:none;">Approved</td>
-                        <td style="display:none;">Rejected</td>
+                        
                         <td class="font-weight-medium">
                         <a class="badge badge-danger" href="<?php echo base_url(); ?>Dashboard/allocated_room_form/<?php echo $row->alloted_room_id;?>">Delete</a>
                         </td>

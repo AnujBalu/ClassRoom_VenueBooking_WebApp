@@ -73,23 +73,6 @@
        }
       }
 
-      function available_or_not(){
-        const checking = document.getElementById("availability").value;
-        const alloted = document.getElementById("alloted");
-        const available = document.getElementById("available_room_list");
-
-        if(checking == 'Availabile'){
-          available.style.display="block";
-          alloted.style.display="none";
-       }
-       else if (checking == 'Alloted'){
-        available.style.display="none";
-        alloted.style.display="block";
-       };
-      }
-
-
-
       $(document).ready(function () {
       $('#myTable').DataTable();
       });

@@ -133,6 +133,11 @@ class Inserting_model extends CI_Model{
          $query = $this->db->get('seating_capacity');  
          return $query;  
       }
+    public function room_type()
+    {
+      $query = $this->db->get('room_type');
+      return $query;
+    }
 
 
 
@@ -327,36 +332,142 @@ class Inserting_model extends CI_Model{
     public function get_available_admin_allocation(){
       $this->load->database();
       
-      $fd = '2022-09-20';
-      $td = '2022-09-29';
-      $avail_room_name='EC111';
-      echo "<script>console.log('star: " . $df. "' );</script>";
-
-      $this->db->select('*');
+      $current_day = date('Y-m-d');
+    
+      $this->db->select('room_name');
       $this->db->from('academic_classroom_booking');
-      $this->db->where('"'. $fd. '"BETWEEN from_date AND to_date');
-      $this->db->or_where('"'. $td. '"BETWEEN from_date AND to_date');
-      $this->db->where('room_name',$avail_room_name);
-
-     
+      $this->db->where('"'.$current_day.'" BETWEEN from_date AND to_date');
       $query1 = $this->db->get(); 
 
-      
+      $this->db->select('allocated_room_name');
+      $this->db->from('form');
+      $this->db->where('("'.$current_day.'" BETWEEN f_date AND t_date) AND (approval="approved")');
+      $query2 = $this->db->get();
+
+      $not_avail_room = (array) null;
       $is_date_available = 0;
-      for ($x = 0; $x < 1; $x++) {
-     
-      foreach ($query1->result() as $row){  
-        echo "<script>console.log('swtar: " . $row->room_name. "' );</script>";
-        echo "<script>console.log('star: " . $row->from_date. "' );</script>";
 
+      foreach ($query2->result() as $row){
+        array_push($not_avail_room,$row->allocated_room_name);
         $is_date_available = 1;
-        };
-        if($is_date_available == 0){
-          echo "<script>console.log('staedwdcr - available' );</script>";
+        //echo "<script>console.log('swt11111r: " . $row->room_name. "' );</script>";
+      }
+  
+      foreach ($query1->result() as $row){
+        array_push($not_avail_room,$row->room_name);
+        $is_date_available = 1;
+        //echo "<script>console.log('swt11141r: " . $row->room_name. "' );</script>";
+      }
 
-        };
-      };
+      
+    if ($is_date_available == 1){
+
+  
+      $this->db->select('*');
+      $this->db->from('room_info');
+      $this->db->join('floor', 'floor.floor_id = room_info.floor');
+      $this->db->join('block_name', 'block_name.block_name_id = room_info.block_name');
+      $this->db->join('seating_capacity', 'seating_capacity.seating_capacity_id = room_info.seating_capacity');
+      $this->db->join('room_type', 'room_type.room_type_id = room_info.room_type');
+      $this->db->where_in('room_name NOT',$not_avail_room);
+
+
+      
+      $avail_room_name = $this->db->get();
+    }
+    else{
+      $this->db->select('*');
+      $this->db->from('room_info');
+      $this->db->join('floor', 'floor.floor_id = room_info.floor');
+      $this->db->join('block_name', 'block_name.block_name_id = room_info.block_name');
+      $this->db->join('seating_capacity', 'seating_capacity.seating_capacity_id = room_info.seating_capacity');
+      $this->db->join('room_type', 'room_type.room_type_id = room_info.room_type');
+      $avail_room_name = $this->db->get();
+    };
+
+    return $avail_room_name; 
   }
   //////////////////////////////////////////////////////////////////////
+  public function avail_request_room_name($para){
+    $this->load->database();
+
+    $data = $this->db->get_where('form', array('id' => $para))->row();
+
+    $fd = $data->f_date;
+    $td = $data->t_date;
+    $ft = $data->f_time;
+    $td = $data->t_time;
+    echo "<script>console.log('ggg: " . $ft. "' );</script>";
+    echo "<script>console.log('ggg: " . $td. "' );</script>";
+
+
+    $is_date_available = 0;
+    $this->db->select('room_name, IF((("'. $fd. '" BETWEEN from_date AND to_date) OR ("'. $td. '" BETWEEN from_date AND to_date)), (("'. $ft. '" BETWEEN from_time AND to_time) OR ("'. $td. '" BETWEEN from_time AND to_time)), "")');
+    $this->db->from('academic_classroom_booking');
+    $query1 = $this->db->get(); 
+
+    $this->db->select('*');
+    $this->db->from('form');
+    $this->db->where('((("'. $fd. '" BETWEEN f_date AND t_date) OR ("'. $td. '" BETWEEN f_date AND t_date )) AND approval="approved")AND (("'. $ft. '" BETWEEN f_time AND t_time) OR ("'. $td. '" BETWEEN f_time AND t_time))');
+    
+    $query2 = $this->db->get();
+    $not_avail_room = (array) null;
+
+    foreach ($query2->result() as $row){
+      array_push($not_avail_room,$row->room_name);
+      $is_date_available = 1;
+      echo "<script>console.log('swt11111r: " . $row->room_name. "' );</script>";
+    }
+
+    foreach ($query1->result() as $row){
+      array_push($not_avail_room,$row->room_name);
+      $is_date_available = 1;
+      echo "<script>console.log('swt11141r: " . $row->room_name. "' );</script>";
+    }
+
+    if ($is_date_available == 1){
+      $this->db->select('room_name');
+      $this->db->from('room_info');
+      $this->db->where_in('room_name NOT',$not_avail_room);
+      $avail_room_name = $this->db->get();
+
+
+    }
+    else{
+      $this->db->select('room_name');
+      $this->db->from('room_info');
+      $avail_room_name = $this->db->get();
+    };
+
+    
+
+    return $avail_room_name; 
+  }
+
+  public function allocate_faculty_request($id){
+    $this->load->database();
+    $data = $this->db->get_where('form', array('id' => $id))->row();
+
+    $data->approval = 'approved';
+    $data->allocated_room_name = $this->input->post('allocated_room_name');
+    $this->db->where('id',$id);
+    $this->db->update('form',$data);
+  }
+  public function edit_faculty_request($id){
+    $this->load->database();
+    $data = $this->db->get_where('form', array('id' => $id))->row();
+
+    $data->capacity = $this->input->post('req_capacity');
+    $data->room_type = $this->input->post('edit_rm_type');
+    $data->f_date = $this->input->post('f_date');
+    $data->t_date = $this->input->post('t_date'); 
+    $data->f_time = $this->input->post('f_time');
+    $data->t_time = $this->input->post('t_time');
+    $this->db->where('id',$id);
+    $this->db->update('form',$data);
+  }
+
+
+
 }
 ?>
