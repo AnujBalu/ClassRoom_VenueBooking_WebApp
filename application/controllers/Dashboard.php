@@ -5,7 +5,12 @@ class Dashboard extends CI_Controller {
 		parent::__construct();
 		
 	}
-	public function index($each_rm_name='')
+	public function index(){
+		$this->load->helper('url');
+		$this->load->view('users\request_form');
+
+	}
+	public function dashboard($each_rm_name='')
 	{	
 		$this->load->database();
 		$current_date = @date('Y-m-d');

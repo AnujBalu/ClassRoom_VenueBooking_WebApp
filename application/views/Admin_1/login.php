@@ -7,8 +7,8 @@
           <div class="col-lg-4 mx-auto">
             <div class="auth-form-light text-left py-5 px-4 px-sm-5 border">
               <div class="brand-logo">
-             <center><img src="images/logo/login_logo.jpeg" alt="logo" style="width:30% ;"></center>
-              <center><img src="images/logo/login_name_img.jpg" alt="logo" style="width:100% ;"></center>
+             <center><img src="<?php echo base_url() ?>images/logo/login_logo.jpeg" alt="logo" style="width:30% ;"></center>
+              <center><img src="<?php echo base_url()?>images/logo/login_name_img.jpg" alt="logo" style="width:100% ;"></center>
               </div>
               <center><h3>Venue Booking</h3></center>
               <center><h6 class="font-weight-light">Sign in to continue.</h6></center>

@@ -14,41 +14,41 @@
           var place = '';
           if(auditorium == event){
             place = 'AUDITOTIUM';
-            location.href = "<?php echo base_url()?>Dashboard/index/AUDITOTIUM";
+            location.href = "<?php echo base_url()?>Dashboard/dashboard/AUDITOTIUM";
 
           }
           else if(seminarhall== event){
             place = 'SEMINAR HALL';
-            location.href = "<?php echo base_url()?>Dashboard/index/SEMINAR HALL";
+            location.href = "<?php echo base_url()?>Dashboard/dashboard/SEMINAR HALL";
 
           }
           else if(conferencehall== event){
             window.place =  'CONFERENCE HALL';
-            location.href = "<?php echo base_url()?>Dashboard/index/CONFERENCE HALL";
+            location.href = "<?php echo base_url()?>Dashboard/dashboard/CONFERENCE HALL";
 
           }
           else if(academicclasses== event){
             window.place = 'CLASS ROOM';
-            location.href = "<?php echo base_url()?>Dashboard/index/CLASS ROOM";
+            location.href = "<?php echo base_url()?>Dashboard/dashboard/CLASS ROOM";
 
           }
           else if(smartclass== event){
             window.place = 'SMART CLASS ROOM';
-            location.href = "<?php echo base_url()?>Dashboard/index/SMART CLASS ROOM";
+            location.href = "<?php echo base_url()?>Dashboard/dashboard/SMART CLASS ROOM";
 
           }
           else if(discussionroom== event){
             window.place = 'DISCUSSION ROOM';
-            location.href = "<?php echo base_url()?>Dashboard/index/DISCUSSION ROOM";
+            location.href = "<?php echo base_url()?>Dashboard/dashboard/DISCUSSION ROOM";
 
           }
           else if(syndicateroom== event){
             window.place = 'SYNDICATE ROOM';
-            location.href = "<?php echo base_url()?>Dashboard/index/SYNDICATE ROOM";
+            location.href = "<?php echo base_url()?>Dashboard/dashboard/SYNDICATE ROOM";
           }
           else{
             window.place = 'AUDITOTIUM';
-            location.href = "<?php echo base_url()?>Dashboard/index/AUDITOTIUM";
+            location.href = "<?php echo base_url()?>Dashboard/dashboard/AUDITOTIUM";
           }
         }
   </script>

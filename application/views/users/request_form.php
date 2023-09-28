@@ -354,15 +354,115 @@ function select_projector(){
         float: right;
 
       }
-      @media screen and (max-width: 600px) {
+
+      @import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&display=swap');
+
+@import url('https://fonts.googleapis.com/css2?family=Nunito:wght@300&display=swap');
+
+body {
+  margin: 0;
+  background-color:#D4F1F4;
+}
+
+.navbar {
+  display: flex;
+  align-items: center;
+  margin-top:0;
+  width:100%;
+  height: 60px;
+  background-color:#ffffff;
+  justify-content:flex-end;
+  position:fixed;
+  z-index: 999;
+  box-shadow: 0 4px 2px -2px rgba(0,0,0,.5);
+
+}
+
+.logo-img {
+  color:#fff;
+  width: 55px;
+  font-family: 'Bebas Neue';
+  font-size:50px;
+  letter-spacing:8px;
+  text-shadow: 5px 5px #111;
+  padding-right:5%;
+}
+
+.navbar a {
+  text-decoration:none;
+  color: black;
+  font-size:20px;
+  font-family: 'Nunito', sans-serif;
+}
+
+.navbar a:hover {
+  color:#808080;
+}
+
+.navbar ul{
+    width: 70%;
+  list-style:none;
+  margin-right:30px;
+}
+
+.navbar li {
+  padding-left:40px;
+  display:inline-block;
+}
+
+.login-btn {
+  background-color:#0c91f5;
+  width:90px;
+  height:45px;
+  margin-right:20px;
+  border-radius:30px;
+  border:none;
+  color:#fff;
+  font-size:18px;
+  font-family: 'Nunito', sans-serif;
+}
+.login-btn:hover{
+    background-color:#49abf5;
+}
+
+@media screen and (max-width: 600px) {
   .testbox,.colums,.banner,.item,.projector,.question,.question-answer,.radio_9,.radio_10,.radio_11,.radio_12,.radio_13,.radio_14,.radio_15,.radio_16,.radio_17,.radio_18,.speaker,.system,.wifi .col-75, .colums,.item,.no_of_projector,.no_of_speaker,.no_of_system,.btn-block input[type="radio"] {
     width: 1000%;
     margin-top:100px;
   }
  }
+ @media (max-width: 991px){
+    .logo-img{
+        width: 55px;
+    }
+ }
     </style>
+
+
   </head>
+
+  
+
+
   <body style="background-color: rgb(4, 85, 151);">
+
+  <header>
+      <nav class="navbar">
+        
+      <img class="logo-img" src="<?php echo base_url()?>images/logo/login_logo.jpeg" ALT="align box">
+
+        
+        <ul>
+          <li><a href="#">Projects</a></li>
+          <li><a href="#">Services</a></li>
+          <li><a href="#">Staff</a></li>
+          <li><a href="#">About</a></li>
+        </ul>
+        
+        <button class=login-btn><a href="<?php echo base_url()?>Login">Login</a></button>
+        
+    </header>
+
     <div class="testbox">
       <form>
         <div class="banner">
@@ -519,7 +619,7 @@ function select_projector(){
                  
                 </fieldset>
         <div class="btn-block">
-          <button type="submit" href="/">Submit</button>
+          <button type="submit" href="#">Submit</button>
         </div>
       </form>
     </div>
