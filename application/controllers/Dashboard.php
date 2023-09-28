@@ -58,14 +58,15 @@ class Dashboard extends CI_Controller {
 		$this->load->view('Admin_1/Templates/java_script');
 		
 	}
-	public function get_student_data()
-	{
-		$id = $this->input->get('id');
-		$get_student = $this->student_model->get_student_data_model($id);
-		echo json_encode($get_student); 
-		exit();
-	}
-	
+
+public function method1($param1="")
+    {
+     
+      echo $param1;
+
+
+
+    }
 	
 	public function open_form()
 	{
@@ -98,6 +99,15 @@ class Dashboard extends CI_Controller {
 		$this->load->view('Admin_1/Templates/java_script');
 		
 	}
+	public function get_popup_data()
+{
+	$this->load->database();  
+	$this->load->helper('url');
+	$id = $this->input->post("id");
+	$data['room_profiles'] = $this->db->get_where('form', array('id' => $id))->row();
+
+    $this->load->view('Admin_1/pop_up_table',$data);
+}
 	public function admin_allocation()
 	{
 
