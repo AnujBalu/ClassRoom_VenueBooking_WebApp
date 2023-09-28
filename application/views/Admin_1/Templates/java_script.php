@@ -82,6 +82,12 @@
       $(document).ready(function () {
           $('#alloted_search').DataTable();
       });
+      $(document).ready(function () {
+          $('#recent_added').DataTable();
+      });
+      $(document).ready(function () {
+          $('#class_rm_schedule').DataTable();
+      });
   </script>
 
 </body>

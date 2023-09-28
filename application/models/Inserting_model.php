@@ -129,10 +129,10 @@ class Inserting_model extends CI_Model{
       return $query;
     }
     public function seating_capacity()
-      {  
-         $query = $this->db->get('seating_capacity');  
-         return $query;  
-      }
+    {  
+      $query = $this->db->get('seating_capacity');  
+        return $query;  
+    }
     public function room_type()
     {
       $query = $this->db->get('room_type');
@@ -350,13 +350,13 @@ class Inserting_model extends CI_Model{
       foreach ($query2->result() as $row){
         array_push($not_avail_room,$row->allocated_room_name);
         $is_date_available = 1;
-        //echo "<script>console.log('swt11111r: " . $row->room_name. "' );</script>";
+        echo "<script>console.log('qq2: " . $row->allocated_room_name. "' );</script>";
       }
   
       foreach ($query1->result() as $row){
         array_push($not_avail_room,$row->room_name);
         $is_date_available = 1;
-        //echo "<script>console.log('swt11141r: " . $row->room_name. "' );</script>";
+        echo "<script>console.log('qq1: " . $row->room_name. "' );</script>";
       }
 
       
@@ -396,33 +396,71 @@ class Inserting_model extends CI_Model{
     $fd = $data->f_date;
     $td = $data->t_date;
     $ft = $data->f_time;
-    $td = $data->t_time;
+    $tt = $data->t_time;
     echo "<script>console.log('ggg: " . $ft. "' );</script>";
     echo "<script>console.log('ggg: " . $td. "' );</script>";
 
 
     $is_date_available = 0;
-    $this->db->select('room_name, IF((("'. $fd. '" BETWEEN from_date AND to_date) OR ("'. $td. '" BETWEEN from_date AND to_date)), (("'. $ft. '" BETWEEN from_time AND to_time) OR ("'. $td. '" BETWEEN from_time AND to_time)), "")');
-    $this->db->from('academic_classroom_booking');
-    $query1 = $this->db->get(); 
+    $query1 = $this->db->get('academic_classroom_booking');
 
-    $this->db->select('*');
-    $this->db->from('form');
-    $this->db->where('((("'. $fd. '" BETWEEN f_date AND t_date) OR ("'. $td. '" BETWEEN f_date AND t_date )) AND approval="approved")AND (("'. $ft. '" BETWEEN f_time AND t_time) OR ("'. $td. '" BETWEEN f_time AND t_time))');
-    
-    $query2 = $this->db->get();
+    foreach ($query1->result() as $row){
+
+      if(($fd>=$row->from_date and $fd <= $row->to_date) or ($td>=$row->from_date and $td <= $row->to_date)){
+      
+        if(($ft>=$row->from_time and $ft <= $row->to_time) or ($tt>=$row->from_time and $tt <= $row->to_time)){
+          $row->room_name = $row->room_name;
+        }
+        else{
+          $row->room_name = null;
+        }
+      }
+      else{ $row->room_name = null; }
+
+    }
+
+
+    $query2 = $this->db->get('form');
+
+    foreach ($query2->result() as $row){
+
+
+      if(($fd>=$row->f_date and $fd <= $row->t_date) or ($td>=$row->f_date and $td <= $row->t_date)){
+      
+        if(($ft>=$row->f_time and $ft <= $row->t_time) or ($tt>=$row->f_time and $tt <= $row->t_time)){
+          
+          if($row->approval == 'approved'){
+            $row->room_name = $row->room_name;
+          }
+          else{
+            $row->room_name = null;
+          }
+        }
+        else{
+          $row->room_name = null;
+        }
+      }
+      else{ $row->room_name = null; }
+      
+    }
+
     $not_avail_room = (array) null;
 
     foreach ($query2->result() as $row){
-      array_push($not_avail_room,$row->room_name);
-      $is_date_available = 1;
-      echo "<script>console.log('swt11111r: " . $row->room_name. "' );</script>";
+      if ($row->room_name != ''){
+        array_push($not_avail_room,$row->room_name);
+        $is_date_available = 1;
+        echo "<script>console.log('query222: " . $row->room_name. "' );</script>";
+      }
     }
 
     foreach ($query1->result() as $row){
-      array_push($not_avail_room,$row->room_name);
-      $is_date_available = 1;
-      echo "<script>console.log('swt11141r: " . $row->room_name. "' );</script>";
+      if ($row->room_name != ''){
+        array_push($not_avail_room,$row->room_name);
+        $is_date_available = 1;
+        echo "<script>console.log('query111: " . $row->room_name. "' );</script>";
+
+      }
     }
 
     if ($is_date_available == 1){
@@ -466,6 +504,34 @@ class Inserting_model extends CI_Model{
     $this->db->where('id',$id);
     $this->db->update('form',$data);
   }
+
+
+  public function time_percent(){
+
+    $this->load->database();  
+		$time_per=$this->db->get('academic_classroom_booking');
+		$room_type=$this->db->get('room_type');
+		$room_info=$this->db->get('room_info');
+
+    foreach($room_type->result() as $row){
+			foreach($room_info->result() as $coloum){
+				if($row->room_type_id == $coloum->room_type){
+					$coloum->room_type = $row->room_type_name;
+
+				}
+			}
+		}
+    foreach($time_per->result() as $row){
+			foreach($room_info->result() as $coloum){
+				if($row->room_name == $coloum->room_name){
+					$row->room_type = $coloum->room_type;
+
+				}
+			}
+		}
+
+    return $time_per;
+}
 
 
 

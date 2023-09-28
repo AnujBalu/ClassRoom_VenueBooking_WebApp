@@ -31,4 +31,28 @@
 
   <!-- endinject -->
   <link rel="shortcut icon" href="<?php echo base_url()?>images/logo/title.png" />
+
+  
 </head>
+
+<style>
+input[type=text],select{
+  width:100%;
+  padding:12px 20px;
+  margin:8px 0;
+  display:inline-block;
+  border:1px solid #ccc;
+  border-radius:4px;
+  box-sizing:border-box;
+  
+}
+select:required:invalid {
+  color: gray;
+}
+option[value=""][disabled] {
+  display: none;
+}
+option {
+  color: black;
+}
+</style>

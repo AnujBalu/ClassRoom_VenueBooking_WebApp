@@ -3,31 +3,76 @@
 class Dashboard extends CI_Controller {
 	public function __construct(){
 		parent::__construct();
+		
 	}
-	public function index()
-	{
+	public function index($each_rm_name='')
+	{	
+		$this->load->database();
+		$current_date = @date('Y-m-d');
+		$data['each_rm']=$each_rm_name;
+		echo "<script>console.log('select_room_type	: " . $each_rm_name. "' );</script>";		
+
+		$this->db->distinct();
+		$this->db->select('room_name');
+		$this->db->from('academic_classroom_booking');
+		$this->db->where('"'.$current_date.'" BETWEEN from_date AND to_date');
+		$acadamic_booked = $this->db->get()->result_array();
+        $acadamic_booked = count($acadamic_booked);
+
+		$this->db->distinct();
+		$this->db->select('allocated_room_name');
+		$this->db->from('form');
+		$this->db->where('("'.$current_date.'" BETWEEN f_date AND t_date) AND approval="approved"');
+		$req_booked = $this->db->get()->result_array();
+        $req_booked = count($req_booked);
+
+		$this->db->select('allocated_room_name');
+		$this->db->from('form');
+		$this->db->where('approval !="approved"');
+		$no_of_req = $this->db->get()->result_array();
+        $data['no_of_req'] = count($no_of_req);
+		
+		$this->db->select('room_name');
+		$this->db->from('room_info');
+		$tot_rm = $this->db->get()->result_array();
+      	$data['tot_rm'] = count($tot_rm);
+
+		echo "<script>console.log('booked room	: " .$date['no_of_req']. "' );</script>";
+
+
+        //total rooms
+        
+        //un booked
+		$data['total_booked'] = $req_booked + $acadamic_booked;
+        $un_booked = $data['tot_rm'] - $data['total_booked'] ;
+        $data['un_booked'] = $un_booked;
+		
+		$this->load->model('Inserting_model');
+		$data['time_per'] = $this->Inserting_model->time_percent();
+
 		$this->load->helper('url');
 		$this->load->view('Admin_1/Templates/style_script');
 		$this->load->view('Admin_1/Templates/navbar');
 		$this->load->view('Admin_1/Templates/side_bar');
-		$this->load->view('Admin_1/dashboard');
+		$this->load->view('Admin_1/dashboard',$data);
 		$this->load->view('Admin_1/Templates/java_script');
 		
 	}
-public function method1($param1="")
-    {
-     
-      echo $param1;
-
-
-
-    }
+	public function get_student_data()
+	{
+		$id = $this->input->get('id');
+		$get_student = $this->student_model->get_student_data_model($id);
+		echo json_encode($get_student); 
+		exit();
+	}
+	
 	
 	public function open_form()
 	{
 		$this->load->database();  
 	   	$this->load->model('Inserting_model');
 		$data['room_type'] = $this->Inserting_model->room_type();
+		$data['capacity'] = $this->Inserting_model->seating_capacity();
 
 		$this->load->helper('url');
 		$this->load->view('Admin_1/Templates/style_script');

@@ -17,7 +17,7 @@
                           <div class="col-sm-3">
                             <div class="form-check">
                               <label class="form-check-label">
-                                <input type="radio" name="user" class="form-check-input" id="Faculty" value="faculty"  onclick="faculty_or_student()">
+                                <input type="radio" name="user" class="form-check-input" id="Faculty" value="faculty"  onclick="faculty_or_student()" checked>
                                 Faculty
                               </label>
                             </div>
@@ -37,13 +37,13 @@
                     </div>
 
 
-                    <div class="div" id="faculty_user" style="display:none">
+                    <div class="div" id="faculty_user">
                     <div class="row">
                         <div class="col-md-6">
                           <div class="form-group row">
                             <label class="col-sm-3 col-form-label">Faculty Name</label>
                             <div class="col-sm-9">
-                              <input type="text" name="faculty_name" class="form-control" placeholder="NAME"/>
+                              <input type="text" name="faculty_name" class="form-control" placeholder="NAME" required/>
                             </div>
                           </div>
                         </div>
@@ -52,7 +52,7 @@
                           <div class="form-group row">
                             <label class="col-sm-3 col-form-label">Faculty Id</label>
                             <div class="col-sm-9">
-                              <input type="text" name="faculty_id" class="form-control" placeholder="ID"/>
+                              <input type="text" name="faculty_id" class="form-control" placeholder="ID" required/>
                             </div>
                           </div>
                         </div>
@@ -65,7 +65,7 @@
                           <div class="form-group row">
                             <label class="col-sm-3 col-form-label">Student Name</label>
                             <div class="col-sm-9">
-                              <input type="text" name="Student_name" class="form-control" placeholder="NAME"/>
+                              <input type="text" name="Student_name" class="form-control" placeholder="NAME" required/>
                             </div>
                           </div>
                         </div>
@@ -74,7 +74,7 @@
                           <div class="form-group row">
                             <label class="col-sm-3 col-form-label">Student Id</label>
                             <div class="col-sm-9">
-                              <input type="text" name="Student_id" class="form-control" placeholder="ID"/>
+                              <input type="text" name="Student_id" class="form-control" placeholder="ID" required/>
                             </div>
                           </div>
                         </div>
@@ -89,7 +89,7 @@
                         <div class="form-group row">
                           <label class="col-sm-3 col-form-label">E-mail</label>
                           <div class="col-sm-9">
-                            <input type="email" name="email" class="form-control" placeholder="EX : abc@bitsathy.ac.in"/>
+                            <input type="email" name="email" class="form-control" placeholder="EX : abc@bitsathy.ac.in" required/>
                           </div>
                         </div>
                       </div>
@@ -97,26 +97,17 @@
                     
                       <div class="col-md-6">
                         <div class="form-group row">
-                          <label for="dept" class="col-sm-3 form-label">Capacity</label>                          
+                          <label for="dept" class="col-sm-3 form-label" for="capacity">Capacity</label>                          
                           <div class="col-sm-9">
-                            <input class="form-control" name="capacity" list="datalistOptions" id="dept" placeholder="Capacity">
-                            <datalist id="datalistOptions">
-                            <option value="" disabled selected hidden>Capacity</option>
-                              <option>10</option>
-                              <option>13</option>
-                              <option>15</option>
-                              <option>30</option>
-                              <option>40</option>
-                              <option>60</option>
-                              <option>120</option>
-                              <option>180</option>
-                              <option>200</option>
-                              <option>300</option>
-                              <option>700</option>
-                              <option>1800</option>
-                                 
-         
-                            </datalist>
+                            <select id="capacity" name="capacity" required>
+                            <option selected hidden></option>
+                              <?php  
+                                  foreach ($capacity->result() as $row)  
+                                  {  
+                                      ?>
+                                <option><?php echo $row->capacity ?></option>
+                              <?php } ?>
+                            </select>
                             </div>
                           </div>
                         </div>
@@ -125,9 +116,17 @@
 
                       <div class="col-md-6">
                         <div class="form-group row">
-                          <label class="col-sm-3 col-form-label">Room Type</label>
+                          <label class="col-sm-3 col-form-label" for="room_type">Room Type</label>
                           <div class="col-sm-9">
-                            <input type="textarea" name="room_type" class="form-control" placeholder="" />
+                            <select id="room_type" name="room_type" required>
+                            <option selected hidden></option>
+                              <?php  
+                                  foreach ($room_type->result() as $row)  
+                                  {  
+                                      ?>
+                                <option><?php echo $row->room_type_name ?></option>
+                              <?php } ?>
+                            </select>
                           </div>
                         </div>
                       </div>
@@ -136,7 +135,7 @@
                          <div class="form-group row">
                            <label for="event_id" class="col-sm-3 form-label">Proposal</label>
                            <div class="col-sm-9">
-                              <input class="form-control" name="proposal" list="datalistOptions1" id="event_id" onchange="change(this.value)" placeholder="Events">
+                              <input class="form-control" name="proposal" list="datalistOptions1" id="event_id" onchange="change(this.value)" placeholder="Events" required>
                              <datalist id="datalistOptions1">
                               <option>Academics</option>
                               <option>Interview</option>
@@ -157,7 +156,7 @@
                         <div class="form-group row"  >
                           <label class="col-sm-3 col-form-label" >Event Name</label>
                           <div class="col-sm-9" >
-                            <input type="text" name="others_option" class="form-control bod" placeholder="Event Name"   />
+                            <input type="text" name="others_option" class="form-control bod" placeholder="Event Name" required/>
                           </div>
                         </div>
                     </div>
@@ -167,7 +166,7 @@
                         <div class="form-group row">
                           <label class="col-sm-3 col-form-label">From Date</label>
                           <div class="col-sm-9">
-                            <input type="datetime-local" id="from_date_time" name="from_date_time" class="form-control">
+                            <input type="datetime-local" id="from_date_time" name="from_date_time" class="form-control" required>
                           </div>
                         </div>
                       </div>
@@ -177,7 +176,7 @@
                         <div class="form-group row">
                           <label class="col-sm-3 col-form-label">To Date</label>
                           <div class="col-sm-9">
-                            <input type="datetime-local" id="to_date_time" name="to_date_time" class="form-control">
+                            <input type="datetime-local" id="to_date_time" name="to_date_time" class="form-control" required>
                           </div>
                         </div>
                       </div>
@@ -197,7 +196,7 @@
                           <div class="col-sm-5">
                             <div class="form-check">
                               <label class="form-check-label">
-                                <input type="radio" class="form-check-input" name="projector" id="projector" value="NO" >
+                                <input type="radio" class="form-check-input" name="projector" id="projector" value="NO" checked>
                                 No
                               </label>
                             </div>
@@ -220,7 +219,7 @@
                           <div class="col-sm-5">
                             <div class="form-check">
                               <label class="form-check-label">
-                                <input type="radio" class="form-check-input" name="wifi" id="wifi" value="NO" >
+                                <input type="radio" class="form-check-input" name="wifi" id="wifi" value="NO" checked>
                                 No
                               </label>
                             </div>
@@ -244,7 +243,7 @@
                           <div class="col-sm-5">
                             <div class="form-check">
                               <label class="form-check-label">
-                                <input type="radio" class="form-check-input" name="speaker" id="speaker" value="NO" onclick="select_speaker()">
+                                <input type="radio" class="form-check-input" name="speaker" id="speaker" value="NO" onclick="select_speaker()" checked>
                                 No
                               </label>
                             </div>
@@ -256,7 +255,7 @@
                         <div class="form-group row">
                           <label class="col-sm-3 col-form-label" >No.of Speakers</label>
                           <div class="col-sm-9" >
-                            <input type="number" value="" name="no_of_speaker" class="form-control" placeholder="60"   />
+                            <input type="number" value="" name="no_of_speaker" class="form-control" placeholder="60" checked  />
                           </div>
                         </div>
                       </div> 
@@ -277,7 +276,7 @@
                           <div class="col-sm-5">
                             <div class="form-check">
                               <label class="form-check-label">
-                                <input type="radio" class="form-check-input" name="systems" id="sysRadio2" value="NO" onclick="text()">
+                                <input type="radio" class="form-check-input" name="systems" id="sysRadio2" value="NO" onclick="text()"checked>
                                 No
                               </label>
                             </div>
@@ -288,7 +287,7 @@
                         <div class="form-group row"  >
                           <label class="col-sm-3 col-form-label" >No.of systems</label>
                           <div class="col-sm-9" >
-                            <input type="number" name="no_of_system" class="form-control" placeholder="60"   />
+                            <input type="number" name="no_of_system" class="form-control" placeholder="60"  checked />
                           </div>
                         </div>
                       </div>  

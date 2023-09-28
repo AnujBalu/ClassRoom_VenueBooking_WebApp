@@ -79,7 +79,7 @@ option {
 
               <!--***************************************************************-->
                 <div class="card-body" >
-                  <h4 class="card-title"><?php echo $select_rm_type ?> Table</h4>
+                  <h4 class="card-title"><?php echo $rm_availability ?> Table</h4>
 <!--***************************************************************-->
 <?php if($rm_availability == "Allotement"){ ?>
   <div class="table-responsive"  id="alloted">
@@ -176,26 +176,3 @@ else{?>
       <!-- main-panel ends -->
     
     <!-- page-body-wrapper ends -->
-
-<script>
-
-function available_or_not(){
-        const checking = document.getElementById("availability").value;
-        const alloted = document.getElementById("alloted");
-        const available = document.getElementById("available_room_list");
-        const select_room_type = document.getElementById("select_room_type").value;
-
-        if(checking == 'Availabile'){
-          available.style.display="block";
-          alloted.style.display="none";
-       };
-       if (checking == 'Allotement'){
-        available.style.display="none";
-        alloted.style.display="block";
-       };
-       if(select_room_type == 'CLASS ROOM'){
-        
-       }
-
-      }
-</script>

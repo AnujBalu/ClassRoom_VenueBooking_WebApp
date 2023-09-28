@@ -407,68 +407,59 @@
               </div>
             </div>            
           </div>
-        </div>
+       
         <!-- content-wrapper ends -->
-        <div class="row">
-            <div class="col-md-12 grid-margin stretch-card">
-              <div class="card">
-                <div class="card-body">
-                  <p class="card-title mb-0">Recent booking</p>
-                  <div class="table-responsive">
-                    <div class="table table-hover">
-                    <table class="table table-striped table-borderless">
-                      <thead>
-                        <tr>
-                          <th>Room Name</th>
-                          <th>Room type</th>
-                          <th>Block Name</th>
-                          <th>seating_capacity</th>
-                          <th>Block Name</th>
-                          <th>Projector</th>
-                          <th>WIFI</th>
-                          <th>Speaker</th>
-                          <th>Systems</th>
-                        </tr>  
-                      </thead>
-                      <tbody>
-
-                      <?php  
-        foreach ($info->result() as $row)  
-        {  
-          echo "<script>console.log('Debug Objects: " .$row->room_name. "' );</script>";
-
-            ?>
-
-            <tr>
-                
-                        <td><?php echo $row->room_name;?></td>
-                        <td><?php echo $row->room_type;?></td>
-                        <td><?php echo $row->floor;?></td>
-                        <td><?php echo $row->seating_capacity;?></td>
-                        <td><?php echo $row->block_name;?></td>
-                        <td><?php echo $row->projector;?></td>
-                        <td><?php echo $row->wifi;?></td>
-                        <td><?php echo $row->speaker;?></td>
-                        <td><?php echo $row->systems;?></td>
-                        <td id="id" style="display:none;"><?php echo $row->id;?></td>
-                        <td class="font-weight-medium">
-                        <a class="badge badge-success edit_btn" href="<?php echo base_url(); ?>Dashboard/add_room/<?php echo $row->id;?>">Edit</a>
-                        <a class="badge badge-danger" href="<?php echo base_url(); ?>Dashboard/room_type_deletes/<?php echo $row->id;?>">Delete</a>
-                            
-                        </td>
-                    </tr>
-        <?php }  
-    ?>
-                        
-                      </tbody>
-                    </table>
-                    </div>
-                  </div>
-                </div>
-      <!-- main-panel ends -->
+  <div class="row">
+    <div class="col-md-12 grid-margin stretch-card">
+      <div class="card">
+        <div class="card-body">
+          <p class="card-title mb-0">Recent Added</p>
+          <div class="table-responsive">
+            <div class="table table-hover">
+              <table class="table table-striped table-borderless" id="recent_added">
+                <thead>
+                  <tr>
+                    <th>Room Name</th>
+                    <th>Room type</th>
+                    <th>Block Name</th>
+                    <th>seating_capacity</th>
+                    <th>Block Name</th>
+                    <th>Projector</th>
+                    <th>WIFI</th>
+                    <th>Speaker</th>
+                    <th>Systems</th>
+                    <th hidden></th>
+                    <th hidden></th>
+                  </tr>  
+                </thead>
+                <tbody>
+                  <?php foreach ($info->result() as $row) {  
+                    echo "<script>console.log('Debug Objects: " .$row->room_name. "' );</script>";
+                  ?>
+                  <tr>
+                    <td><?php echo $row->room_name;?></td>
+                    <td><?php echo $row->room_type;?></td>
+                    <td><?php echo $row->floor;?></td>
+                    <td><?php echo $row->seating_capacity;?></td>
+                    <td><?php echo $row->block_name;?></td>
+                    <td><?php echo $row->projector;?></td>
+                    <td><?php echo $row->wifi;?></td>
+                    <td><?php echo $row->speaker;?></td>
+                    <td><?php echo $row->systems;?></td>
+                    <td id="id" style="display:none;"><?php echo $row->id;?></td>
+                    <td class="font-weight-medium">
+                      <a class="badge badge-success edit_btn" href="<?php echo base_url(); ?>Dashboard/add_room/<?php echo $row->id;?>">Edit</a>
+                      <a class="badge badge-danger" href="<?php echo base_url(); ?>Dashboard/room_type_deletes/<?php echo $row->id;?>">Delete</a>       
+                    </td>
+                  </tr>
+                  <?php } ?>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
-    <!-- page-body-wrapper ends -->
-    
   </div>
 
- 
+</div>
